@@ -1,1 +1,11 @@
-pip install django=1.11
+##DJANGO##
+pip install django==1.11 # Django 1.11 instead of 2.0 or 2.1
+pip install django-cors-headers==2.2.0 #to handle cors with React
+pip install djangorestframework
+pip install pillow #ImageField
+##REACT##
+#brew install node #if node has not yet installed
+npm install -g create-react-app
+create-react-app frontend
+#cd frontend
+npm start

@@ -1,0 +1,8 @@
+BACKEND
+
+- USER model custom field "private"
+- Image.image S3 configuration
+- WHAT IS sources??
+- CAN I MtoM relationship instead of "TagsPerImage" table
+
+FRONTED

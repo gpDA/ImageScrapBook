@@ -29,6 +29,9 @@ INSTALLED_APPS = [
 
     #local
     'main',
+
+    #3rd party
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
