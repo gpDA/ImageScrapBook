@@ -31,7 +31,7 @@ class Image(models.Model):
 
 class Tags(models.Model):
     tagname = models.CharField(max_length=150)
-    images = models.ManyToManyField(Image)
+    #images = models.ManyToManyField(Image)
 
     def __str__(self):
         return str(self.tagname)

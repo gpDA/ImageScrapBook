@@ -4,5 +4,7 @@ BACKEND
 - Image.image S3 configuration
 - WHAT IS sources??
 - CAN I MtoM relationship instead of "TagsPerImage" table
+- ImageAPIDetailView lookup_field 'slug'
+- query by title?? or multiple queries
 
 FRONTED
