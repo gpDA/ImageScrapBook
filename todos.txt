@@ -6,5 +6,6 @@ BACKEND
 - CAN I MtoM relationship instead of "TagsPerImage" table
 - ImageAPIDetailView lookup_field 'slug'
 - query by title?? or multiple queries
+- jwt token ( RESTFRAMEWORK JWT AUTH [ https://getblimp.github.io/django-rest-framework-jwt/ ])
 
 FRONTED
