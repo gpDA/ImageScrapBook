@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  rabbit:
+    build:
+      context: .
+      dockerfile: rabbit.Dockerfile
+    hostname: somerabbit
+  celeryworker:
+    build:
+      dockerfile: Dockerfile-worker
+      context: .
+    command: celery -A thumbnail worker -l info
+    depends_on:
+      - rabbit
+  workprovider:
+    build: ./thumbnail
+    working_dir: /app
+    command: sh -c "python __init__.py & flower -A thumbnail --port=5555"
+    ports:
+      - "8000:8000"
+      - "5555:5555"
+    depends_on:
+      - rabbit
+      - celeryworker
+
