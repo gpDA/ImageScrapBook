@@ -27,8 +27,7 @@ services:
   workprovider:
     build:
       context: .
-      dockerfile: workprovider.Dockerfile
-    working_dir: /app
+      dockerfile: workprovider/Dockerfile
     command: sh -c "python provide_work.py & flower -A thumbnail --port=5555"
     ports:
       - "8000:8000"
