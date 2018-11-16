@@ -2,6 +2,11 @@
 # Created by https://www.gitignore.io/api/vim,python
 # Edit at https://www.gitignore.io/?templates=vim,python
 
+
+# ignore binary files
+imgsrc/
+
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/

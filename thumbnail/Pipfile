@@ -9,6 +9,8 @@ verify_ssl = true
 pillow = "*"
 celery = "*"
 flower = "*"
+boto3 = "*"
+requests = "*"
 
 [requires]
 python_version = "3.6"

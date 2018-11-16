@@ -19,18 +19,23 @@ services:
       - "9000:9000"
   celeryworker:
     build:
-      dockerfile: Dockerfile-worker
+      dockerfile: worker.Dockerfile
       context: .
     command: celery -A thumbnail worker -l info
     depends_on:
       - rabbit
   workprovider:
-    build: ./thumbnail
+    build:
+      context: .
+      dockerfile: workprovider.Dockerfile
     working_dir: /app
-    command: sh -c "python __init__.py & flower -A thumbnail --port=5555"
+    command: sh -c "python provide_work.py & flower -A thumbnail --port=5555"
     ports:
       - "8000:8000"
       - "5555:5555"
+    environment:
+      AWS_ACCESS_KEY_ID: minio
+      AWS_SECRET_ACCESS_KEY: minio123
     depends_on:
       - rabbit
       - celeryworker
