@@ -2,10 +2,10 @@ version: '3'
 
 services:
   rabbit:
-    build:
-      context: .
-      dockerfile: rabbit.Dockerfile
+    build: ./rabbit
     hostname: somerabbit
+    volumes:
+      - rabbit-storage:/var/lib/rabbitmq
   minio:
     build:
       context: .
@@ -42,3 +42,4 @@ services:
 
 volumes:
   minio-storage:
+  rabbit-storage:
