@@ -6,6 +6,17 @@ services:
       context: .
       dockerfile: rabbit.Dockerfile
     hostname: somerabbit
+  minio:
+    build:
+      context: .
+      dockerfile: minio.Dockerfile
+    volumes:
+      - minio-storage:/data
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    ports:
+      - "9000:9000"
   celeryworker:
     build:
       dockerfile: Dockerfile-worker
@@ -24,3 +35,5 @@ services:
       - rabbit
       - celeryworker
 
+volumes:
+  minio-storage:
