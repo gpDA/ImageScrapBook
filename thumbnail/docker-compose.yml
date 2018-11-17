@@ -24,6 +24,7 @@ services:
     command: celery -A thumbnail worker -l info
     depends_on:
       - rabbit
+      - minio
   workprovider:
     build:
       context: .
@@ -36,6 +37,7 @@ services:
       AWS_ACCESS_KEY_ID: minio
       AWS_SECRET_ACCESS_KEY: minio123
     depends_on:
+      - minio
       - rabbit
       - celeryworker
 
