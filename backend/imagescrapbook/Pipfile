@@ -11,6 +11,8 @@ django-rest-auth = "*"
 djangorestframework-jwt = "*"
 markdown = "*"
 pillow = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

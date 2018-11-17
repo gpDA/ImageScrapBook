@@ -5,6 +5,7 @@
 
 # ignore binary files
 imgsrc/
+uploads/
 
 
 ### Python ###

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: pass
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: imagescrapbook
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  appserver:
+    build: ./imagescrapbook
+    environment:
+      DATABASE_URL: postgres://pass:user@postgres:5432/imagescrapbook
+    ports:
+    - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
