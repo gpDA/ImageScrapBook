@@ -8,5 +8,21 @@ Install Docker, then run `docker-compose up --build` while in either the `backen
 
 # Notes for contributors
 ## Organization
+### Service names
+| backend/docker-compose.yml | description |
+|-----------|------------------------------|
+| appserver | Django app                   |
+| postgres  | Postgres database            |
+
+| thumbnail/docker-compose.yml | description |
+|--------------|-----------------------------|
+| rabbit       | RabbitMQ backing for Celery |
+| minio        | Local S3 mocking for dev |
+| celeryworker | Workers that process Celery jobs |
+| workprovider | Puts Celery jobs for testing purposes |
+
+
+
+## Database containers
 
 For ease of development, even the database has been containerized. However, databases aren't good containerization targets in the real world, and if this project is ever deployed, an alternative automation scheme for setting up and maintaining a non-containerized database cluster will be required.
