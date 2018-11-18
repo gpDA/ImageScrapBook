@@ -44,3 +44,8 @@ services:
 volumes:
   minio-storage:
   rabbit-storage:
+
+networks:
+  default:
+    external:
+      name: backend_default

@@ -11,11 +11,10 @@ import json
 
 def is_json(json_data):
     try:
-        real_json           = json.loads(json_data)
-        is_valid            = True
+        json.loads(json_data)
     except ValueError:
-        is_valid            = False
-    return is_valid
+        return False
+    return True
 
 class ImageAPIDetailView(mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
@@ -34,7 +33,7 @@ class ImageAPIDetailView(mixins.UpdateModelMixin,
         return self.update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)    
+        return self.destroy(request, *args, **kwargs)
 
 class ImageAPIView(mixins.CreateModelMixin,
                         generics.ListAPIView):
