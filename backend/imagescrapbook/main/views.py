@@ -20,7 +20,7 @@ class ImageAPIDetailView(mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,
                     generics.RetrieveAPIView):
     permission_classes          = [] #[permissions.IsAuthenticatedOrReadOnly, ]
-    authentication_classes      = []#[SessionAuthentication] #OR Json Web Token Authentication
+    authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
 
     queryset                    = Image.objects.all()
     serializer_class            = ImageSerializer
@@ -39,7 +39,7 @@ class ImageAPIView(mixins.CreateModelMixin,
                         generics.ListAPIView):
     permission_classes              = [permissions.IsAuthenticatedOrReadOnly]
     authentication_classes          = [SessionAuthentication] #Json Web Token Authentication
-    queryset                        = Image.objects.all()
+    #queryset                        = Image.objects.all()
     serializer_class                = ImageSerializer
 
     def get_queryset(self):
@@ -49,5 +49,6 @@ class ImageAPIView(mixins.CreateModelMixin,
             qs = qs.filter(title__icontains=query) #query by title?? or multiple queries
         return qs
 
+    #logic to save S3 and rabbit needs to set in this function
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)

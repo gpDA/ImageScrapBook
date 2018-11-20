@@ -11,7 +11,8 @@ class Image(models.Model):
     user            = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title           = models.CharField(max_length=150)
     image           = models.ImageField(upload_to=upload_image, null=True, blank=True) #Django Store AWS S3
-    thumbnail_url   = models.TextField(validators=[URLValidator()])
+    #thumanail 1) PROCESSING? 2) SAVED?
+    thumbnail_url   = models.TextField(validators=[URLValidator()], blank=True, default='')
     privacy         = models.BooleanField(default=False) #False : public; True: private
     updated         = models.DateTimeField(auto_now=True)
     timestamp       = models.DateTimeField(auto_now_add=True)

@@ -8,4 +8,16 @@ BACKEND
 - query by title?? or multiple queries
 - jwt token ( RESTFRAMEWORK JWT AUTH [ https://getblimp.github.io/django-rest-framework-jwt/ ])
 
-FRONTED
+FRONTEND
+
+- CRUD double check
+    - 
+- API documentation
+- view urls set-up (TEMPLATE)
+
+- USER GALLERY 
+- PUBLIC GALLERY
+- LOGIN
+- SIGNUP
+- VIEW IMAGES
+- SETTING PAGE 
