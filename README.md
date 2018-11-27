@@ -48,4 +48,5 @@ Install Docker, then run `docker-compose up --build` while in either the `backen
 For ease of development, even the database has been containerized. However, databases aren't good containerization targets in the real world, and if this project is ever deployed, an alternative automation scheme for setting up and maintaining a non-containerized database cluster will be required.
 
 
+PROJECT DESIGN IMAGE
 ![PROJECT DESIGN IMAGE](https://user-images.githubusercontent.com/29666846/49106991-94a6ce80-f252-11e8-8e34-c0dd67f66eec.jpeg)
