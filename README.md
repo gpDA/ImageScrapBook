@@ -1,8 +1,28 @@
 # Installing
-Install Docker, then run `docker-compose up --build` while in either the `backend/` or `thumbnail` directory. This should download, build and run all images.
+Install Docker, then run `docker-compose up --build` while in either the `backend/` or `thumbnail` - directory. This should download, build and run all images.
+- ERROR HELPER
+    IF `ERROR: for backend_appserver_1_606e41b6d69c  Cannot start service appserver: OCI runtime create failed: container_linux.go:348: starting container process caused "exec: \"./init.sh\": permission denied": unknown` this error appears
+    1) ImageScrapBook/backend/imagescrapbook `sudo chmod 777 init.sh`
+    2) cd ..
+    3) run `docker-compose up --build`
 
 # Running
 `pipenv shell` to switch to virtual env--shouldn't be required.  
+- ERROR HELPER
+    FIRST, if you have not used `pipenv` before `brew install pipenv`
+    currently required python_version for pipenv is python==3.6
+    If pipenv is not intalled correctly,
+    check  python version `python3 --version`
+    I think if you use Anaconda for Python the default version for python3 is python==3.7.1 ...
+    ERROR `Warning: Python 3.6.2 was not found on your system…`
+    Then, you may install Python 3.6 by https://www.python.org/downloads/release/python-367/
+    Then check `python3 --version` again
+    `pipenv --python /usr/local/bin/python3`
+    now run `pipenv shell` for virtual environment
+
+    `pip install -r ../../requirements.txt`
+    
+
 `docker-compose up --build` to run a Docker setup for the first time.  
 `docker-compose build [containers...]; docker-compose up` to rebuild changed containers.  
 
