@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.authtoken.models import Token
 from rest_framework import generics, mixins, permissions, status
 from rest_framework.response import Response
 from .permissions import IsOwnerOrReadOnly
@@ -33,27 +34,14 @@ class UserCreate(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserAPIView(generics.ListAPIView):
     permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
-    #queryset                        = User.objects.all()
-    serializer_class                = UserSerializer
-    '''
-    def post(self, request, *args, **kwargs):
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+    authentication_classes          = [] #[SessionAuthentication]
+    queryset                        = User.objects.all()
+    serializer_class                = UserSerializer   
 
-        return self.create(request, *args, **kwargs)
-    '''        
 
-    def get_queryset(self):
-        qs = Image.objects.all()
-        query = self.request.GET.get('q')
-        if query is not None:
-            qs = qs.filter(title__icontains=query)
-        return qs
 
 class UserAPIDetailView(mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin,

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_auth',
     'rest_framework.authtoken',
+    #'allauth',
 ]
 
 MIDDLEWARE = [
@@ -121,12 +122,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
+#If you are deploying to Apache using mod_wsgi, make sure you configure Apache to
+#allow the Authorization header with WSGIPassAuthorization
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication', #TokenAuthentication
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
