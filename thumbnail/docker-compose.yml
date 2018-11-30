@@ -22,6 +22,9 @@ services:
       dockerfile: worker.Dockerfile
       context: .
     command: celery -A thumbnail worker -l info
+    environment:
+      AWS_ACCESS_KEY_ID: minio
+      AWS_SECRET_ACCESS_KEY: minio123
     depends_on:
       - rabbit
       - minio

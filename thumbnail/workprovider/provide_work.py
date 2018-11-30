@@ -17,6 +17,6 @@ if __name__ == "__main__":
         ext = fname.split(".")[-1]
         imguid = uuid.uuid4()
         s3name = f"{prefix}-{str(imguid)}.{ext}"
-        with open('imgsrc/'+ fname, "rb") as f:
+        with open('imgsrc/' + fname, "rb") as f:
             s3.Object('image', s3name).put(Body=f)
-        thumbnail.thumbnailify(s3name, (200, 200))
+        thumbnail.thumbnailify.delay(s3name, (200, 200))
