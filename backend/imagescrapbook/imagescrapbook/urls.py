@@ -1,9 +1,10 @@
-from django.conf.urls import url, include
+from django.urls import include, path
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^', include('main.urls')),
-    url(r'^', include('gallery.urls')),
-    url(r'^', include('registration.urls')),
+    path('admin', admin.site.urls),
+    path('auth/', include('rest_framework.urls')),    
+    path('', include('main.urls')),
+    path('', include('gallery.urls')),
+    path('', include('registration.urls')),
 ]

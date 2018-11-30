@@ -1,18 +1,37 @@
 from rest_framework import serializers
+#from rest_framework.validators import UniqueValidator
+from django.contrib.auth.models import User
 from main.models import Image, Tags
 '''
 Serializers --> JSON
 Serializers --> Validation data
 '''
 
-class ImageSerializer(serializers.ModelSerializer):
-    #user        = UserPublicSerializer(read_only=True)
+class UserSerializer(serializers.ModelSerializer):
+    #Since `images` is a reverse relationship on the User model, it will not be included by default
+    images = serializers.PrimaryKeyRelatedField(many=True, queryset=Image.objects.all())
 
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'],
+                                        validated_data['email'],
+                                        validated_data['password'])
+        return user
+
+
+
+    class Meta:
+        model = User
+        fields = '__all__'
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    #ReadonlyField is untyped
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Image
         fields = [
             'id',
-            #'user',
+            'owner',
             'title',
             'image',
             'thumbnail_url',
