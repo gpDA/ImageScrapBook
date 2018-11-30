@@ -1,0 +1,3 @@
+/user/create
+POST
+Body:

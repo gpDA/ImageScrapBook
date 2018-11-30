@@ -6,3 +6,4 @@ Pillow==2.2.1
 dj-database-url
 djangorestframework-jwt
 django-cors-headers
+#djangorestframework_simplejwt

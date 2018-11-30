@@ -19,6 +19,7 @@ def is_json(json_data):
         return False
     return True
 
+'''
 class UserCreate(APIView):
     #create user
 
@@ -28,6 +29,7 @@ class UserCreate(APIView):
             user = serializer.save()
             if user:
                 token = Token.objects.create(user=user)
+                #print(token)
                 json = serializer.data
                 json['token'] = token.key
 
@@ -62,6 +64,7 @@ class UserAPIDetailView(mixins.UpdateModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+'''        
 
 class ImageAPIView(generics.ListAPIView,
                     mixins.CreateModelMixin):
