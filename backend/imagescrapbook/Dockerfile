@@ -9,4 +9,4 @@ RUN pip install pipenv; pipenv install --system --deploy
 COPY . /app
 RUN python manage.py makemigrations
 
-CMD ["./init.sh"]
+ENTRYPOINT ["python", "manage.py"]
