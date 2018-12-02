@@ -26,6 +26,9 @@ Install Docker, then run `docker-compose up --build` while in either the `backen
 `docker-compose up --build` to run a Docker setup for the first time.  
 `docker-compose build [containers...]; docker-compose up` to rebuild changed containers.  
 
+## Configuring Django
+Changing the "command" attribute of `appserver` in `backend/docker-compose.yml` allows you to execute commands such as makemigrations, migrate, runserver and createsuperuser.
+
 # Notes for contributors
 ## Organization
 ### Service names
