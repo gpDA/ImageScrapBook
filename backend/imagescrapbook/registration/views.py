@@ -43,15 +43,19 @@ class UserAPIView(generics.ListAPIView):
 
 #mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.RetrieveAPIView
 class UserAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes          = [permissions.IsAuthenticatedOrReadOnly,
-                                    IsOwnerOrReadOnly,] #[permissions.IsAuthenticatedOrReadOnly, ]
+
+    permission_classes          = [] #[permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,]
     authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
 
     queryset                    = User.objects.all()
+    #queryset                    = User.objects.filter(is_active=True)
     serializer_class            = UserSerializer
-    lookup_field                = 'id' #slug for later
+    lookup_field                = 'username' #'id' later
 
-    '''
+
+
+
+
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
@@ -60,4 +64,3 @@ class UserAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-    '''

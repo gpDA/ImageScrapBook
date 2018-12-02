@@ -12,7 +12,9 @@ Serializers --> Validation data
 class ImageSerializer(serializers.ModelSerializer):
 
     #ReadonlyField is untyped
-    owner = serializers.ReadOnlyField(source='user.username')
+    #NESTED SERIALIZER
+    owner       = serializers.ReadOnlyField(source='user.username')
+    #owner      = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Image
         fields = [
@@ -39,6 +41,11 @@ class ImageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Image.objects.create(**validated_data)
 
+    '''
+    def get_owner(self, obj):
+        qs = User.objects.filter(user=obj)
+        return UserSerializer(qs, many=True).data        
+    '''
 
 '''
 class TagsSerializer(serializers.ModelSerializer):

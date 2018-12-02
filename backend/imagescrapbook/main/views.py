@@ -37,19 +37,20 @@ class ImageAPIView(generics.ListCreateAPIView):
     #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
     #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
     
+    '''owner (user / after login OWNER)'''
     def perform_create(self, serializer):
         # `create() method` has additional `owner` field (along with the validated data from the request)
         serializer.save(owner=self.request.user)
-
+    
 #mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.RetrieveAPIView    
 class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes          = [permissions.IsAuthenticatedOrReadOnly,] #[permissions.IsAuthenticatedOrReadOnly, ]
+    permission_classes          = [] #[permissions.IsAuthenticatedOrReadOnly, ]
     authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
 
     queryset                    = Image.objects.all()
     serializer_class            = ImageSerializer
     lookup_field                = 'id' #slug for later
-    '''
+
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
@@ -58,4 +59,3 @@ class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-    '''

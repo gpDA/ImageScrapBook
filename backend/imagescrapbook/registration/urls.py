@@ -17,7 +17,7 @@ urlpatterns = [
     # logout : rest-auth/logout
     path('rest-auth/', include('rest_auth.urls')),
 
-    
+
     path('user', UserAPIView.as_view()),
-    path('user/<int:id>', UserAPIDetailView.as_view()),
+    path('user/<slug:username>', UserAPIDetailView.as_view()),
 ]

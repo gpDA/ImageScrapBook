@@ -1,3 +1,88 @@
-/user/create
+
+### USER REGISTRATION ###
+/user
 POST
-Body:
+Body
+{
+    "username": "",
+    "email": "",
+    "password": ""
+}    
+HTTP200 Return
+{
+    "id": 71,
+    "username": "hellow1",
+    "email": "geonpyung1111@gmail.com",
+    "images": []
+}
+
+### USER(list) lookup ###
+/user
+GET
+Body
+[
+    {
+        "id": 1,
+        "username": "geonpyung2",
+        "email": "gl1144@nyu.edu",
+        "images": []
+    },
+    {
+        "id": 36,
+        "username": "geonpyung11",
+        "email": "gl11411@nyu.edu",
+        "images": []
+    },
+]  
+
+### USER(detail) lookup ###
+/user/<username>
+GET
+Body
+{
+    "id": 71,
+    "username": "hellow1",
+    "email": "geonpyung1111@gmail.com",
+    "images": []
+}
+
+### User Login ###
+/rest-auth/login/
+POST
+Body
+{
+    "username": "",
+    "email": "",
+    "password": ""
+}
+HTTP200 Return
+{
+    "key": "3989093091fb8cf2a1f6d1290a8420ec56e17a94"
+}
+
+### User Logout ###
+/rest-auth/logout/
+
+...
+
+### Image Creation ###
+/
+POST
+Body
+{
+    "title": "",
+    "image": null,
+    "thumbnail_url": ""
+}
+HTTP200 Return
+...
+...
+...
+
+### Image Detail ###
+/<id>
+GET
+Body
+
+...
+...
