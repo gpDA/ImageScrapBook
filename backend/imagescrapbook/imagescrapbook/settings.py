@@ -123,6 +123,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 #If you are deploying to Apache using mod_wsgi, make sure you configure Apache to
 #allow the Authorization header with WSGIPassAuthorization
 REST_FRAMEWORK = {
