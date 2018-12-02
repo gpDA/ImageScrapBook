@@ -7,8 +7,9 @@ from main.permissions import IsOwnerOrReadOnly
 #from accounts.api.permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_object_or_404
 from main.models import Image
-from main.serializers import ImageSerializer, UserSerializer
-from django.contrib.auth.models import User
+from main.serializers import ImageSerializer
+from .serializers import UserSerializer
+from django.contrib.auth.models import  User
 
 import json
 
@@ -19,8 +20,11 @@ def is_json(json_data):
         return False
     return True
 
-class UserCreate(APIView):
-    #create user
+class UserAPIView(generics.ListAPIView):
+    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes          = [] #[SessionAuthentication]
+    queryset                        = User.objects.all()
+    serializer_class                = UserSerializer   
 
     def post(self, request, format='json'):
         serializer = UserSerializer(data=request.data)
@@ -31,22 +35,14 @@ class UserCreate(APIView):
                 #print(token)
                 json = serializer.data
                 json['token'] = token.key
+                print(json['token'])
 
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 
-class UserAPIView(generics.ListAPIView):
-    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly]
-    authentication_classes          = [] #[SessionAuthentication]
-    queryset                        = User.objects.all()
-    serializer_class                = UserSerializer   
-
-
-
-class UserAPIDetailView(mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,
-                    generics.RetrieveAPIView):
+#mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.RetrieveAPIView
+class UserAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes          = [permissions.IsAuthenticatedOrReadOnly,
                                     IsOwnerOrReadOnly,] #[permissions.IsAuthenticatedOrReadOnly, ]
     authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
@@ -55,6 +51,7 @@ class UserAPIDetailView(mixins.UpdateModelMixin,
     serializer_class            = UserSerializer
     lookup_field                = 'id' #slug for later
 
+    '''
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
@@ -63,3 +60,4 @@ class UserAPIDetailView(mixins.UpdateModelMixin,
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+    '''

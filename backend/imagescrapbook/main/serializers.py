@@ -1,38 +1,18 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
-from django.contrib.auth.models import User
+#from rest_framework.validators import UniqueValidator
+#from django.contrib.auth.models import User
 from main.models import Image, Tags
 '''
 Serializers --> JSON
 Serializers --> Validation data
 '''
 
-class UserSerializer(serializers.ModelSerializer):
-    #Since `images` is a reverse relationship on the User model, it will not be included by default
-    images      = serializers.PrimaryKeyRelatedField(many=True, queryset=Image.objects.all())
 
-    email       = serializers.EmailField(required=True, 
-                                    validators=[UniqueValidator(queryset=User.objects.all())])
-    username    = serializers.CharField(max_length=32)
-    password    = serializers.CharField(min_length=8, write_only=True)
-
-
-    def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'],
-                                        validated_data['email'],
-                                        validated_data['password'])
-        return user
-
-
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'password', 'images')
 
 class ImageSerializer(serializers.ModelSerializer):
 
     #ReadonlyField is untyped
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='user.username')
     class Meta:
         model = Image
         fields = [
@@ -51,9 +31,14 @@ class ImageSerializer(serializers.ModelSerializer):
         if thumbnail_url == '':
             thumbnail_url = None
 
+        #image is None
         if title is None and image is None and thumbnail_url is None:
             raise serializers.ValidationError('title, image, or thumbnail url is required.')
         return data
+
+    def create(self, validated_data):
+        return Image.objects.create(**validated_data)
+
 
 '''
 class TagsSerializer(serializers.ModelSerializer):
