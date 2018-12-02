@@ -6,7 +6,7 @@ Install Docker, then run `docker-compose up --build` while in either the `backen
     2) cd ..
     3) run `docker-compose up --build`
 
-# Running
+# Running (pipenv shell is optional)
 `pipenv shell` to switch to virtual env--shouldn't be required.  
 - ERROR HELPER
     FIRST, if you have not used `pipenv` before `brew install pipenv`
@@ -21,7 +21,8 @@ Install Docker, then run `docker-compose up --build` while in either the `backen
     now run `pipenv shell` for virtual environment
 
     `pip install -r ../../requirements.txt`
-    
+
+--------------------------------------------  
 
 `docker-compose up --build` to run a Docker setup for the first time.  
 `docker-compose build [containers...]; docker-compose up` to rebuild changed containers.  
