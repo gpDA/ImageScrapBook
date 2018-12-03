@@ -25,7 +25,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'image',
             'thumbnail_url',
             'timestamp',
-            'privacy'
+            'privacy',
         ]
     def validate(self, data):
         title = data.get('title', None)
@@ -58,15 +58,16 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = [
             'id',
-            'tagnames',
-            #'images'
+            'tagname',
+            'images'
 
         ]
     def validate(self, data):
-        tagname = data.get('tagnames', None)
+        tagname = data.get('tagname', None)
         if tagname == '':
             tagname = None
 
         if tagname is None:
             raise serializers.ValidationError('tagname is required.')
         return data
+     
