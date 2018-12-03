@@ -17,7 +17,7 @@ class Image(models.Model):
     updated         = models.DateTimeField(auto_now=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
 
-
+    
     def __str__(self):
         return str(self.title)[:50]
 
@@ -30,12 +30,11 @@ class Image(models.Model):
         return self.user
     '''
 
-class Tags(models.Model):
-    tagname = models.CharField(max_length=150)
-    #images = models.ManyToManyField(Image)
+class Tag(models.Model):
+    tagnames = models.ManyToManyField(Image)
 
     def __str__(self):
-        return str(self.tagname)
+        return str(self.tagnames)
 
 
 

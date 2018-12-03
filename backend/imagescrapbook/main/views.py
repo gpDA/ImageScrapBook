@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from .permissions import IsOwnerOrReadOnly
 #from accounts.api.permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_object_or_404
-from main.models import Image
-from main.serializers import ImageSerializer
+from main.models import Image, Tag
+from main.serializers import ImageSerializer, TagSerializer
 
 import json
 
@@ -25,6 +25,7 @@ class ImageAPIView(generics.ListCreateAPIView):
     authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
     queryset                        = Image.objects.all()
     serializer_class                = ImageSerializer
+
 
     def get_queryset(self):
         qs = Image.objects.all()
@@ -62,3 +63,22 @@ class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+#generics.ListAPIView,mixins.CreateModelMixin
+class TagAPIView(generics.ListCreateAPIView):
+    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
+    authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+    queryset                        = Tag.objects.all()
+    serializer_class                = TagSerializer
+
+    #otherwise, if we created image, there is no way of associating the user that created it
+    #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
+    #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
+    
+    '''owner (user / after login OWNER)'''
+
+    '''
+    def perform_create(self, serializer):
+        # `create() method` has additional `owner` field (along with the validated data from the request)
+        serializer.save(owner=self.request.user)
+    '''        
