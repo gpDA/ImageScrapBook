@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: rabbit
+  name: rabbit
+spec:
+  replicas: 1
+  serviceName: "rabbit"
+  selector:
+    matchLabels:
+      io.kompose.service: rabbit
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: rabbit
+    spec:
+      containers:
+      - image: skairunner/rabbit:latest
+        name: rabbit
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/rabbitmq
+          name: imagesnap-rabbit
+      hostname: somerabbit
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: imagesnap-rabbit
+      spec:
+        accessModes: [ "ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi
+status: {}
