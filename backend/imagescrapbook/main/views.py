@@ -38,9 +38,12 @@ class ImageAPIView(generics.ListCreateAPIView):
     #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
     
     '''owner (user / after login OWNER)'''
+
+    '''
     def perform_create(self, serializer):
         # `create() method` has additional `owner` field (along with the validated data from the request)
         serializer.save(owner=self.request.user)
+    '''
     
 #mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.RetrieveAPIView    
 class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):

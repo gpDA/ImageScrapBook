@@ -24,9 +24,11 @@ class Image(models.Model):
     class Meta:
         verbose_name = 'Image Repository'
 
+    '''
     @property
     def owner(self):
         return self.user
+    '''
 
 class Tags(models.Model):
     tagname = models.CharField(max_length=150)

@@ -13,13 +13,14 @@ class ImageSerializer(serializers.ModelSerializer):
 
     #ReadonlyField is untyped
     #NESTED SERIALIZER
-    owner       = serializers.ReadOnlyField(source='user.username')
+    
+    #owner       = serializers.ReadOnlyField(source='user.username')
     #owner      = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Image
         fields = [
             'id',
-            'owner',
+            'user',
             'title',
             'image',
             'thumbnail_url',
