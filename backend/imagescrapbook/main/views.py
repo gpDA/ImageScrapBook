@@ -17,7 +17,7 @@ def is_json(json_data):
     except ValueError:
         return False
     return True
-     
+
 
 #generics.ListAPIView,mixins.CreateModelMixin
 class ImageAPIView(generics.ListCreateAPIView):
