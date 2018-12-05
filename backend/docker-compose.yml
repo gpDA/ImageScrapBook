@@ -7,10 +7,14 @@ services:
       POSTGRES_USER: pass
       POSTGRES_PASSWORD: user
       POSTGRES_DB: imagescrapbook
+    ports:
+      - "2345:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
   appserver:
-    build: ./imagescrapbook
+    build:
+      context: .
+      dockerfile: imagescrapbook/Dockerfile
     command: runserver 0.0.0.0:8000 #migrate --fake 
     environment:
       AWS_ACCESS_KEY_ID: minio

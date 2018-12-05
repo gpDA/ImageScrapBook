@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from main.models import Image, Tag
+import thumbnail
 import uuid
 import boto3
 import sys
@@ -26,6 +27,8 @@ class ImageSerializer(serializers.ModelSerializer):
             'extension',
             'timestamp',
             'privacy',
+            'thumbnail_url',
+            'imageurl',
         ]
 
     def validate(self, data):
@@ -43,6 +46,7 @@ class ImageSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
+        # Do processing
         image = validated_data['image']
         del validated_data['image']
         ext = validated_data['extension']
@@ -55,6 +59,9 @@ class ImageSerializer(serializers.ModelSerializer):
         validated_data['imageurl'] = imgurl
         obj = Image(**validated_data)
         obj.save()
+
+        # Send task
+        thumbnail.thumbnailify.delay(obj.id, imgurl, (200, 200))
         return obj
 
     '''
