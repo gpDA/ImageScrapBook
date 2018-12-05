@@ -1,6 +1,4 @@
 from rest_framework import serializers
-#from rest_framework.validators import UniqueValidator
-#from django.contrib.auth.models import User
 from main.models import Image, Tag
 '''
 Serializers --> JSON
@@ -8,12 +6,11 @@ Serializers --> Validation data
 '''
 
 
-
 class ImageSerializer(serializers.ModelSerializer):
 
     #ReadonlyField is untyped
-    #NESTED SERIALIZER
-    
+    #NESTED SERIALIZE
+
     #owner       = serializers.ReadOnlyField(source='user.username')
     #owner      = serializers.SerializerMethodField(read_only=True)
     class Meta:
@@ -27,6 +24,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'timestamp',
             'privacy',
         ]
+
     def validate(self, data):
         title = data.get('title', None)
         image = data.get('image', None)
@@ -47,7 +45,7 @@ class ImageSerializer(serializers.ModelSerializer):
     '''
     def get_owner(self, obj):
         qs = User.objects.filter(user=obj)
-        return UserSerializer(qs, many=True).data        
+        return UserSerializer(qs, many=True).data
     '''
 
 
@@ -70,4 +68,3 @@ class TagSerializer(serializers.ModelSerializer):
         if tagname is None:
             raise serializers.ValidationError('tagname is required.')
         return data
-     
