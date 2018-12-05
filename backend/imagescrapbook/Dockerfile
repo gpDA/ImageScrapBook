@@ -1,12 +1,13 @@
 FROM python:3.6
 
 # Layer deps first
-COPY Pipfile Pipfile.lock /app/
+COPY imagescrapbook/Pipfile imagescrapbook/Pipfile.lock /app/
 WORKDIR /app
 RUN pip install pipenv; pipenv install --system --deploy
+COPY thumbnail/thumbnail/ /app/thumbnail/
 
 # Copy app
-COPY . /app
+COPY imagescrapbook/ /app
 RUN python manage.py makemigrations
 
 ENTRYPOINT ["python", "manage.py"]

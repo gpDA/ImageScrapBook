@@ -1,10 +1,16 @@
 # Installing
-Install Docker, then run `docker-compose up --build` while in either the `backend/` or `thumbnail` - directory. This should download, build and run all images.
+Install Docker. Then:
+## Installing backend
+Run `docker-compose up --build` while in the `backend/` directory. Docker downloads all deps and builds all containers.
+
 - ERROR HELPER
     IF `ERROR: for backend_appserver_1_606e41b6d69c  Cannot start service appserver: OCI runtime create failed: container_linux.go:348: starting container process caused "exec: \"./init.sh\": permission denied": unknown` this error appears
     1) ImageScrapBook/backend/imagescrapbook `sudo chmod 777 init.sh`
     2) cd ..
     3) run `docker-compose up --build`
+
+## Installing thumbnail containers
+Run `docker-compose -f docker-compose-thumb.yml up --build celeryworker` while in the `backend/` directory.
 
 # Running (pipenv shell is optional)
 `pipenv shell` to switch to virtual env--shouldn't be required.  
@@ -33,12 +39,12 @@ Changing the "command" attribute of `appserver` in `backend/docker-compose.yml` 
 # Notes for contributors
 ## Organization
 ### Service names
-| backend/docker-compose.yml | description |
+| docker-compose.yml | description |
 |-----------|------------------------------|
 | appserver | Django app                   |
 | postgres  | Postgres database            |
 
-| thumbnail/docker-compose.yml | description |
+| docker-compose.yml | description |
 |--------------|-----------------------------|
 | rabbit       | RabbitMQ backing for Celery |
 | minio        | Local S3 mocking for dev |
