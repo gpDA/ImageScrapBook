@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from main.models import Image, Tag
+import uuid
+import boto3
+import sys
 '''
 Serializers --> JSON
 Serializers --> Validation data
@@ -20,7 +23,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'user',
             'title',
             'image',
-            'thumbnail_url',
+            'extension',
             'timestamp',
             'privacy',
         ]
@@ -35,12 +38,24 @@ class ImageSerializer(serializers.ModelSerializer):
             thumbnail_url = None
 
         #image is None
-        if title is None and image is None and thumbnail_url is None:
-            raise serializers.ValidationError('title, image, or thumbnail url is required.')
+        if title is None or image is None:
+            raise serializers.ValidationError('title and image is required.')
         return data
 
     def create(self, validated_data):
-        return Image.objects.create(**validated_data)
+        image = validated_data['image']
+        del validated_data['image']
+        ext = validated_data['extension']
+        # TODO: have a shared s3 obj instead of instantiating
+        s3 = boto3.resource('s3', use_ssl=False, endpoint_url='http://minio:9000/')
+        # TODO: check for collisions
+        imguuid = uuid.uuid4()
+        imgurl = f'{validated_data["user"].id}-{imguuid}.{ext}'
+        s3.Object('image', imgurl).put(Body=image.file)
+        validated_data['imageurl'] = imgurl
+        obj = Image(**validated_data)
+        obj.save()
+        return obj
 
     '''
     def get_owner(self, obj):

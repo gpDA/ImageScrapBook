@@ -13,6 +13,7 @@ markdown = "*"
 pillow = "*"
 dj-database-url = "*"
 psycopg2-binary = "*"
+boto3 = "*"
 
 [dev-packages]
 

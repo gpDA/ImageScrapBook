@@ -9,7 +9,9 @@ def upload_image(instance, filename):
 class Image(models.Model):
     user            = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title           = models.CharField(max_length=150)
-    image           = models.ImageField(upload_to=upload_image, null=True, blank=True) #Django Store AWS S3
+    image           = models.ImageField(upload_to=upload_image, null=True, blank=True) # dummy for forms
+    extension = models.CharField(max_length=10) # likewise
+    imageurl = models.TextField(blank=True, default='')
     #thumanail 1) PROCESSING? 2) SAVED?
     thumbnail_url   = models.TextField(validators=[URLValidator()], blank=True, default='')
     privacy         = models.BooleanField(default=False) #False : public; True: private
