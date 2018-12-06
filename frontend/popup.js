@@ -18,8 +18,7 @@ function get_urls() {
     wholeList.appendChild(listElement);
     for (var i = 0; i < picUrls.length; i++){
       var listItem = document.createElement("li");
-      listItem.innerHTML = "<a href=" + picUrls[i].src + " download=" + picUrls[i].src + "><img src=" + picUrls[i].src +
-      " width=50%, height=50%>" + "</a>";
+      listItem.innerHTML = "<a href= save_img.html><img src=" + picUrls[i].src + " width=50%, height=50%>" + "</a>";
       chrome.extension.getBackgroundPage().console.log( "src: ", picUrls[i].src );
       listElement.appendChild(listItem);
     }
