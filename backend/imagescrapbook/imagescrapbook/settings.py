@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_auth',
     'rest_framework.authtoken',
-    #'allauth',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -70,9 +70,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ORIGIN_WHITELIST = (
-#     'localhost:3000/'
-# )
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/.*$'
+
 
 ROOT_URLCONF = 'imagescrapbook.urls'
 
