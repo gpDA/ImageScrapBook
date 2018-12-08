@@ -72,7 +72,7 @@ MIDDLEWARE = [
 
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_URLS_REGEX = r'^/api/.*$'
+CORS_URLS_REGEX = r'^/api/.*$|^/user/.*$'
 
 
 ROOT_URLCONF = 'imagescrapbook.urls'
