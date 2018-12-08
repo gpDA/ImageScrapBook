@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  replicas: 1
+  serviceName: "postgres"
+  selector:
+    matchLabels:
+      io.kompose.service: postgres
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: postgres
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: imagescrapbook
+        - name: POSTGRES_PASSWORD
+          value: user
+        - name: POSTGRES_USER
+          value: pass
+        - name: PGDATA
+          value: /var/lib/postgresql/data/dbfiles/
+        image: postgres:11
+        name: postgres
+        ports:
+        - containerPort: 5432
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: pgdata
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi

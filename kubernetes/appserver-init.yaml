@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: appserver-migrate
+spec:
+  template:
+    spec:
+      containers:
+      - args:
+        - migrate
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: minio
+        - name: AWS_SECRET_ACCESS_KEY
+          value: minio123
+        - name: DATABASE_URL
+          value: postgres://pass:user@postgres:5432/imagescrapbook
+        image: skairunner/imagescrap-appserver
+        name: appserver-migrate
+        ports:
+        - containerPort: 8000
+        resources: {}
+      restartPolicy: Never
+status: {}

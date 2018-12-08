@@ -2,12 +2,12 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert
+    kompose.cmd: kompose convert -f docker-compose.yml
     kompose.version: 1.17.0 (a74acad)
   creationTimestamp: null
   labels:
-    io.kompose.service: celeryworker
-  name: celeryworker
+    io.kompose.service: appserver
+  name: appserver
 spec:
   replicas: 1
   strategy: {}
@@ -15,16 +15,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: celeryworker
+        io.kompose.service: appserver
     spec:
       containers:
       - args:
-        - celery
-        - -A
-        - thumbnail
-        - worker
-        - -l
-        - info
+        - runserver
+        - 0.0.0.0:8000
         env:
         - name: AWS_ACCESS_KEY_ID
           value: minio
@@ -32,8 +28,12 @@ spec:
           value: minio123
         - name: DATABASE_URL
           value: postgres://pass:user@postgres:5432/imagescrapbook
-        image: skairunner/imagescrap-test_worker:latest
-        name: celeryworker
+        - name: PYTHONUNBUFFERED
+          value: "0"
+        image: skairunner/imagescrap-appserver
+        name: appserver
+        ports:
+        - containerPort: 8000
         resources: {}
       restartPolicy: Always
 status: {}

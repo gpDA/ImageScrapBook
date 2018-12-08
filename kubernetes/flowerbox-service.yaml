@@ -9,7 +9,6 @@ metadata:
     io.kompose.service: flowerbox
   name: flowerbox
 spec:
-  type: LoadBalancer
   ports:
   - name: "access"
     port: 5555
