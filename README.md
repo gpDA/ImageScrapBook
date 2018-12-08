@@ -9,9 +9,6 @@ Run `docker-compose up --build` while in the `backend/` directory. Docker downlo
     2) cd ..
     3) run `docker-compose up --build`
 
-## Installing thumbnail containers
-Run `docker-compose -f docker-compose-thumb.yml up --build celeryworker` while in the `backend/` directory.
-
 # Running (pipenv shell is optional)
 `pipenv shell` to switch to virtual env--shouldn't be required.  
 - ERROR HELPER
