@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: celeryworker
+  name: celeryworker
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: celeryworker
+    spec:
+      containers:
+      - args:
+        - celery
+        - -A
+        - thumbnail
+        - worker
+        - -l
+        - info
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: minio
+        - name: AWS_SECRET_ACCESS_KEY
+          value: minio123
+        image: skairunner/imagescrap-test_worker:latest
+        name: celeryworker
+        resources: {}
+      restartPolicy: Always
+status: {}

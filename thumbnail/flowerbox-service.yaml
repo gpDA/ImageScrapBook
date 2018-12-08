@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: flowerbox
+  name: flowerbox
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "access"
+    port: 5555
+    targetPort: 5555
+  selector:
+    io.kompose.service: flowerbox
+status:
+  loadBalancer: {}

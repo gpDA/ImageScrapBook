@@ -3,13 +3,21 @@ version: '3'
 services:
   rabbit:
     build: thumbnail/rabbit
+    image: skairunner/rabbit:latest
     hostname: somerabbit
     volumes:
       - rabbit-storage:/var/lib/rabbitmq
+  flowerbox:
+    image: skairunner/flower:latest
+    ports:
+      - "5555:5555"
+    depends_on:
+      - rabbit
   minio:
     build:
       context: thumbnail/
       dockerfile: minio.Dockerfile
+    image: skairunner/minio:latest
     volumes:
       - minio-storage:/data
     environment:
@@ -21,6 +29,7 @@ services:
     build:
       dockerfile: thumbnail/worker.Dockerfile
       context: .
+    image: skairunner/imagescrap-test_worker:latest
     command: celery -A thumbnail worker -l info
     environment:
       AWS_ACCESS_KEY_ID: minio
@@ -32,8 +41,14 @@ services:
   workprovider:
     build:
       context: .
+<<<<<<< HEAD:backend/docker-compose-thumb.yml
       dockerfile: thumbnail/workprovider/Dockerfile
     command: sh -c "python provide_work.py & flower -A thumbnail --port=5555"
+=======
+      dockerfile: workprovider/Dockerfile
+    image: skairunner/imagescrap-workprovider:latest
+    command: sh -c "python provide_work.py"
+>>>>>>> k8s:thumbnail/docker-compose.yml
     ports:
       - "8000:8000"
       - "5555:5555"
