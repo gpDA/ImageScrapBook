@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import Image, Tag
+from main.models import Image, Tag, Sharing
 import thumbnail
 import uuid
 import boto3
@@ -71,6 +71,14 @@ class ImageSerializer(serializers.ModelSerializer):
     '''
 
 
+class SharingSerializer(serializers.ModelSerializer):
+
+    #images      = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = Sharing
+        fields = '__all__'
+
+
 class TagSerializer(serializers.ModelSerializer):
 
     #images      = serializers.SerializerMethodField(read_only=True)
@@ -82,6 +90,7 @@ class TagSerializer(serializers.ModelSerializer):
             'images'
 
         ]
+
     def validate(self, data):
         tagname = data.get('tagname', None)
         if tagname == '':

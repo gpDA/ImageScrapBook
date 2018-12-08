@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from .permissions import IsOwnerOrReadOnly
 #from accounts.api.permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_object_or_404
-from main.models import Image, Tag
-from main.serializers import ImageSerializer, TagSerializer
+from main.models import Image, Tag, Sharing
+from main.serializers import ImageSerializer, TagSerializer, SharingSerializer
 
 import json
 
@@ -64,8 +64,16 @@ class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-#generics.ListAPIView,mixins.CreateModelMixin
+
+
+class SharingAPIView(generics.ListCreateAPIView):
+    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
+    authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+    queryset                        = Sharing.objects.all()
+    serializer_class                = SharingSerializer    
     
+
+
 class TagAPIView(generics.ListCreateAPIView):
     permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
     authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
