@@ -15,6 +15,7 @@ services:
     build:
       context: .
       dockerfile: imagescrapbook/Dockerfile
+    image: skairunner/imagescrap-appserver
     command: runserver 0.0.0.0:8000 #migrate --fake 
     environment:
       AWS_ACCESS_KEY_ID: minio
