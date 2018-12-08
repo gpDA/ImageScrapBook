@@ -9,6 +9,11 @@ kubectl create -f postgres-service.yaml
 # Client services
 kubectl create -f celeryworker-deployment.yaml
 kubectl create -f flowerbox-deployment.yaml
+
+# Migrate django before appserver up
+kubectl create -f appserver-init.yaml
+
+# Appserver
 kubectl create -f appserver-deployment.yaml
 
 # Expose to outside world
