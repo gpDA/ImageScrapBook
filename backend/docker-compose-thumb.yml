@@ -41,14 +41,9 @@ services:
   workprovider:
     build:
       context: .
-<<<<<<< HEAD:backend/docker-compose-thumb.yml
       dockerfile: thumbnail/workprovider/Dockerfile
-    command: sh -c "python provide_work.py & flower -A thumbnail --port=5555"
-=======
-      dockerfile: workprovider/Dockerfile
     image: skairunner/imagescrap-workprovider:latest
     command: sh -c "python provide_work.py"
->>>>>>> k8s:thumbnail/docker-compose.yml
     ports:
       - "8000:8000"
       - "5555:5555"
