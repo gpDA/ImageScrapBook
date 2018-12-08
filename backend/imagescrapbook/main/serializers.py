@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from main.models import Image, Tag, Sharing
+from django.contrib.auth.models import User
+from registration.serializers import UserSerializer
 import thumbnail
 import uuid
 import boto3
@@ -17,6 +19,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     #owner       = serializers.ReadOnlyField(source='user.username')
     #owner      = serializers.SerializerMethodField(read_only=True)
+    user      = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Image
         fields = [
@@ -30,6 +33,10 @@ class ImageSerializer(serializers.ModelSerializer):
             'thumbnail_url',
             'imageurl',
         ]
+
+    def get_user(self,obj):
+        qs = User.objects.all()
+        return UserSerializer(qs, many=True).data
 
     def validate(self, data):
         title = data.get('title', None)

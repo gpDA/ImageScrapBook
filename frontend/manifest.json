@@ -9,12 +9,12 @@
 		"default_icon": "capture.png",
 		"default_title": "ImageScrapBook",
 		"default_popup": "popup.html"
-	} ,
+	},
 	  "background": {
 	    "scripts": ["background.js"],
 	    "persistent": false
-	  },
-	"permissions": [
+		},
+		"public": [
 		"notifications", "activeTab", "tabs", "contextMenus", "clipboardWrite", "<all_urls>", "http://*/*", "https://*/*"
 	]
 }
