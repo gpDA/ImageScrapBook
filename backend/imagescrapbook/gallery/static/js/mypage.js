@@ -1,7 +1,10 @@
 const cardDeck = document.getElementById('card-deck')
 const addnew = document.getElementById('add-new')
 const shareButton = document.getElementById('share')
-let photoLists = [];
+const USER_ID = 1;
+let myPhotos = [];
+let sharedPhotos = [];
+
 // function getBase64FromImageUrl(url) {
 //     var img = new Image();
 //
@@ -50,13 +53,28 @@ let photoLists = [];
 
 
 
-const fetchReq = () => {
+const fetchMyPhotos = (userId) => {
   fetch('http://35.224.129.143/api/')
   .then(res => res.json())
   .then(res => {
-    photoLists.push(res);
-    generateCards(photoLists[0])
+    res.filter(photoObject => photoObject.user.id === userId);
+    myPhotos.push(res);
+    generateCards(myPhotos[0])
   })
+}
+
+const fetchSharedPhotos = (userId) => {
+      fetch()
+      .then(res => res.json())
+      .then(res => {
+        res.filter(sharedObject => sharedObject.shared_by === userId);
+        sharedPhotos.push(res);
+        return fetch()
+      })
+      .then(res => res.json())
+      .then(res => {
+
+      })
 }
 
 // const getUserName = () => {
