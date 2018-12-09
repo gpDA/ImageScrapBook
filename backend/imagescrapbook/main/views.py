@@ -7,7 +7,7 @@ from .permissions import IsOwnerOrReadOnly
 #from accounts.api.permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_object_or_404
 from main.models import Image, Tag, Sharing
-from main.serializers import ImageSerializer, TagSerializer, SharingSerializer
+from main.serializers import ImageSerializer, TagSerializer
 
 import json
 
@@ -22,7 +22,7 @@ def is_json(json_data):
 #generics.ListAPIView,mixins.CreateModelMixin
 class ImageAPIView(generics.ListCreateAPIView):
     permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
-    authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+    #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
     queryset                        = Image.objects.all()
     serializer_class                = ImageSerializer
 
@@ -49,7 +49,7 @@ class ImageAPIView(generics.ListCreateAPIView):
 #mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.RetrieveAPIView    
 class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes          = [] #[permissions.IsAuthenticatedOrReadOnly, ]
-    authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
+    #authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
 
     queryset                    = Image.objects.all()
     serializer_class            = ImageSerializer
@@ -66,16 +66,16 @@ class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-class SharingAPIView(generics.ListCreateAPIView):
-    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
-    authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
-    queryset                        = Sharing.objects.all()
-    serializer_class                = SharingSerializer    
+# class SharingAPIView(generics.ListCreateAPIView):
+#     permission_classes              = [] #[permissions.IsAuthenticated,]
+#     #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+#     queryset                        = Sharing.objects.all()
+#     serializer_class                = SharingSerializer    
     
 
 
 class TagAPIView(generics.ListCreateAPIView):
-    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
+    permission_classes              = [] #[permissions.IsAuthenticated,]
     authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
     queryset                        = Tag.objects.all()
     serializer_class                = TagSerializer

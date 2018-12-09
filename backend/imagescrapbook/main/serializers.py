@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from main.models import Image, Tag, Sharing
-from django.contrib.auth.models import User
-from registration.serializers import UserSerializer
+# from django.contrib.auth.models import User
+# from registration.serializers import UserSerializer
+#from main.serializers import RegisterSerializer
 import thumbnail
 import uuid
 import boto3
@@ -17,14 +18,12 @@ class ImageSerializer(serializers.ModelSerializer):
     #ReadonlyField is untyped
     #NESTED SERIALIZE
 
-    #owner       = serializers.ReadOnlyField(source='user.username')
-    #owner      = serializers.SerializerMethodField(read_only=True)
-    user      = serializers.SerializerMethodField(read_only=True)
+    #user      = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Image
         fields = [
             'id',
-            'user',
+            #'user',
             'title',
             'image',
             'extension',
@@ -33,10 +32,13 @@ class ImageSerializer(serializers.ModelSerializer):
             'thumbnail_url',
             'imageurl',
         ]
-
+    '''
     def get_user(self,obj):
         qs = User.objects.all()
-        return UserSerializer(qs, many=True).data
+        return RegisterSerializer(qs, many=True).data
+    '''
+    
+    
 
     def validate(self, data):
         title = data.get('title', None)
@@ -78,12 +80,23 @@ class ImageSerializer(serializers.ModelSerializer):
     '''
 
 
+'''
 class SharingSerializer(serializers.ModelSerializer):
 
     #images      = serializers.SerializerMethodField(read_only=True)
+    #users      = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Sharing
         fields = '__all__'
+
+    def get_images(self,obj):
+        qs = Image.objects.all()
+        return ImageSerializer(qs, many=True).data
+
+    def get_users(self,obj):
+        qs = User.objects.all()
+        return UserSerializer(qs, many=True).data        
+''' 
 
 
 class TagSerializer(serializers.ModelSerializer):
