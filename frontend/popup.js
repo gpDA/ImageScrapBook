@@ -1,6 +1,8 @@
 // This popup.js file is the receive all the image urls data grabbed from the grabbed.js
 // and show them on the popup.html
-
+var clickedUrl = {
+	url: ''
+}
 function init() {
 	go_gallery();
 	go_public_gallery();
@@ -21,11 +23,17 @@ function get_urls() {
     wholeList.appendChild(listElement);
     for (var i = 0; i < picUrls.length; i++){
       var listItem = document.createElement("li");
-      listItem.innerHTML = "<a href= save_img.html><img src=" + picUrls[i].src + " width=30%, height=30%>" + "</a>";
+      listItem.innerHTML = `<a href= save_img.html><img id = "saved-image" name = ${i} src= ${picUrls[i].src} width=30% height=30%></a>`;
       chrome.extension.getBackgroundPage().console.log( "src: ", picUrls[i].src );
       listElement.appendChild(listItem);
     }
     chrome.extension.getBackgroundPage().console.log("get_urls function ");
+		const ulContainer = document.getElementById('ulContainer')
+		ulContainer.addEventListener('click', event => {
+			clickedUrl.url =  picUrls[event.target.name].src
+			window.clickedUrl = picUrls[event.target.name].src
+			return clickedUrl
+		})
   }
   else{
 		console.log("Images unavailable");
@@ -36,6 +44,7 @@ function get_urls() {
 // onload:  used within the <body> element to execute a script once a
 //      web page has **completely loaded** all content (including images, script files, CSS files, etc.).
 window.onload = get_urls();
+
 
 //=============BUTTONS on HTML===============
 

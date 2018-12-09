@@ -1,1 +1,1 @@
-console.log("svaeeee");
+console.log(clickedUrl);
