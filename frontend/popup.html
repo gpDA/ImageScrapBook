@@ -6,17 +6,55 @@
   </head>
   <body>
     <h1>ImageScrapBook</h1>
-    <div class="btn_container">
-      <button type="button" id="my_gallery_btn" class="btn" title="Selection tool">My Gallery</button>
-      <button type="button" id="public_gallery_btn" class="btn" title="Selection tool">Public Gallery</button>
+
+
+    <div id="popup">
+              <div class="btn_container">
+                <button type="button" id="my_gallery_btn" class="btn" title="Selection tool">My Gallery</button>
+                <button type="button" id="public_gallery_btn" class="btn" title="Selection tool">Public Gallery</button>
+              </div>
+
+                <div id="content">
+                  <hr>
+                  <h3> Select an Image to save</h3>
+                  <hr>
+                  <div id="ulContainer"></div>
+                </div>
     </div>
 
-      <div id="content">
-        <hr>
-        <h3> Select an Image to save</h3>
-        <hr>
-        <div id="ulContainer"></div>
-      </div>
+<!--
+    <div id="save_img">
+                <form method="POST" action="register">
+
+                  <div id='grabbed_img' width='30px' height='30px'></div>
+
+                  <p>
+                      <label for="title">Title</label><br />
+                      <input type="text" id="title" name="title" size="50" value="" />
+                  </p>
+                  <p>
+                      <label for="url">Url</label><br />
+                      <input type="text" id="url" name="url" size="50" value="">
+                  </p>
+                  <p>
+                      <label for="comment">Comment</label><br />
+                      <textarea id="comment" name="comment" rows="6" cols="35">
+                      </textarea>
+                  </p>
+                  <p>
+                      <label for="tags">Tags</label><br />
+                      <input type="text" id="tags" name="tags" size="50" value="" />
+                  </p>
+                  <p>
+                      <input id="save" type="submit" value="Save Imgae" />
+                      <span id="status-display"></span>
+                  </p>
+                  <div id="candy">candy</div>
+
+                </form>
+      </div> -->
+
+
 
     <script src="popup.js"></script>
 

@@ -1,18 +1,26 @@
 // This popup.js file is the receive all the image urls data grabbed from the grabbed.js
 // and show them on the popup.html
-var clickedUrl = {
-	url: ''
-}
+// var clickedUrl = {
+// 	url:''
+// }
+//console.log("running:");
+
 function init() {
 	go_gallery();
 	go_public_gallery();
 	//grab_img();
+	console.log("running:");
+	startLoading();
+	url_work();
 }
+
 
 
 function startLoading(){
   chrome.extension.getBackgroundPage().console.log("Popup clicked!");
 }
+
+var temp = document.getElementById('work');
 
 function get_urls() {
   var picUrls = chrome.extension.getBackgroundPage().IMAGE_URLS;
@@ -23,17 +31,23 @@ function get_urls() {
     wholeList.appendChild(listElement);
     for (var i = 0; i < picUrls.length; i++){
       var listItem = document.createElement("li");
-      listItem.innerHTML = `<a href= save_img.html><img id = "saved-image" name = ${i} src= ${picUrls[i].src} width=30% height=30%></a>`;
-      chrome.extension.getBackgroundPage().console.log( "src: ", picUrls[i].src );
+      //listItem.innerHTML = `<a href= save_img.html><img src=" + picUrls[i].src +  " width=30%, height=30% >" + "</a></div>`;
+			listItem.innerHTML = `<a href= save_img.html><img name = ${i} src= ${picUrls[i].src} width=30% height=30% ></a>`;
+      chrome.extension.getBackgroundPage().console.log( "src: ", picUrls[i].src , "name: ", i);
       listElement.appendChild(listItem);
     }
     chrome.extension.getBackgroundPage().console.log("get_urls function ");
-		const ulContainer = document.getElementById('ulContainer')
+		const ulContainer = document.getElementById('ulContainer');
+		chrome.extension.getBackgroundPage().console.log("temp ", work);
 		ulContainer.addEventListener('click', event => {
-			clickedUrl.url =  picUrls[event.target.name].src
-			window.clickedUrl = picUrls[event.target.name].src
-			return clickedUrl
-		})
+					var clicked =  picUrls[event.target.name].src;
+					chrome.extension.getBackgroundPage().console.log("clicked: ", picUrls[event.target.name].src);
+
+					temp.innerHTML+= clicked;
+
+
+
+				})
   }
   else{
 		console.log("Images unavailable");
@@ -44,7 +58,6 @@ function get_urls() {
 // onload:  used within the <body> element to execute a script once a
 //      web page has **completely loaded** all content (including images, script files, CSS files, etc.).
 window.onload = get_urls();
-
 
 //=============BUTTONS on HTML===============
 
@@ -68,6 +81,10 @@ function go_gallery(){
 			chrome.tabs.create({url: newURL});
 	});
 }
+// function url_work(){
+// 	var temp_u = document.getElementById('work');
+// 	temp_u.innerHTML += "44444";
+// }
 
 
 document.addEventListener('DOMContentLoaded', init);
