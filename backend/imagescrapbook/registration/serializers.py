@@ -30,32 +30,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=6,
         required=True)
     email = serializers.EmailField(required=True)
-    password = serializers.CharField(write_only=True)
-
-    def custom_signup(self, request, user):
-        pass
-
-    def get_cleaned_data(self):
-        return {
-            'username': self.validated_data.get('username', ''),
-            'password': self.validated_data.get('password', ''),
-            'email': self.validated_data.get('email', '')
-        }
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-
-        return Response(self.get_response_data(user),
-                        status=status.HTTP_201_CREATED,
-                        headers=headers)
-
-    def perform_create(self, serializer):
-        user = serializer.save(self.request)
-        create_token(self.token_model, user, serializer)
-        return user
+    password = serializers.CharField(write_only=True) 
 
     class Meta:
         model = User

@@ -26,7 +26,7 @@ class Image(models.Model):
 class Sharing(models.Model):
     shared_to            = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_shared_to', on_delete=models.CASCADE)    
     shared_by            = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_shared_by', on_delete=models.CASCADE)
-    Image                = models.ForeignKey(Image, on_delete=models.CASCADE)    
+    image                = models.ForeignKey(Image, related_name='%(class)s_image', on_delete=models.CASCADE)    
 
 
 class Tag(models.Model):

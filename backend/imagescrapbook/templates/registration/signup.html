@@ -62,10 +62,24 @@
             // "/user/create"
             $.post("/rest-auth/registration", {"username": username, "password": password})
             .success(function(data) {
-                var token = data["token"];
-                document.cookie = 'token='+token+";path=/";
-                window.location.href = "/login/";
+                // var token = data["token"];
+                // document.cookie = 'token='+token+";path=/";
+                localStorage.set('token', data['token']);
+                window.location.href = "http://localhost:8000/login";
             });
+            // token = localStorage.get('token)
+
+            /*
+            $.ajax({
+              url: "http://localhost:8000/api/read",
+              headers: {
+                'Authorization': "Token: " + token
+              },
+              success: function (data) {
+                console.log(response)
+              }
+            })
+            */
         });    
         </script>  
 

@@ -31,15 +31,12 @@ class RegisterView(generics.CreateAPIView): #generics.ListCreateAPIView
     queryset                        = User.objects.all()    
     token_model = Token
 
-    # @sensitive_post_parameters_m
-    def dispatch(self, *args, **kwargs):
-        return super(RegisterView, self).dispatch(*args, **kwargs)
-
     def get_response_data(self, user):
         # PROBLEM
         return TokenSerializer(user.auth_token).data
 
-    def save(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
+        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = self.perform_create(serializer)
@@ -49,8 +46,10 @@ class RegisterView(generics.CreateAPIView): #generics.ListCreateAPIView
                         headers=headers)        
 
     def perform_create(self, serializer):
-        user = serializer.save(self.request)
-        create_token(self.token_model, user, serializer)
+        user = serializer.save()
+        user.is_active = True
+        user.set_password(serializer['password'])
+        user.save()
         return user                        
 
 

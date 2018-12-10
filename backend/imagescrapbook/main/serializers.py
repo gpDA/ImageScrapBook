@@ -89,6 +89,23 @@ class ImageSerializer(serializers.ModelSerializer):
         #qs = Image.objects.filter(user=obj).order_by("-timestamp")[:10]
         return UserSerializer(qs, many=True).data
 
+class ImageReadSerializer(serializers.ModelSerializer):
+
+    #ReadonlyField is untyped
+    #NESTED SERIALIZE
+
+    class Meta:
+        model = Image
+        fields = [
+            'id',
+            'title',
+            'image',
+            'extension',
+            'timestamp',
+            'thumbnail_url',
+            'imageurl',
+        ]
+    
 
 class TagSerializer(serializers.ModelSerializer):
 

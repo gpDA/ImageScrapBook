@@ -4,7 +4,7 @@ from main.models import Image, Sharing
 from django.contrib.auth.models import User
 from registration.serializers import UserSerializer
 from main.serializers import ImageSerializer
-from main.serializers import ImageCreateSerializer
+from main.serializers import ImageReadSerializer
 
 class SharingSerializer(serializers.ModelSerializer):
 
@@ -17,9 +17,10 @@ class SharingSerializer(serializers.ModelSerializer):
 
     
     def get_image(self,obj):
-        qs = Image.objects.filter(image=obj)
-        return ImageCreateSerializer(qs, many=True).data
-
+        qs = Image.objects.filter(sharing_image=obj)
+        #qs = Image.objects.all()
+        return ImageReadSerializer(qs, many=True).data
+    
     def get_shared_by(self,obj):
         qs = User.objects.filter(sharing_shared_by=obj)
         return UserSerializer(qs, many=True).data        
