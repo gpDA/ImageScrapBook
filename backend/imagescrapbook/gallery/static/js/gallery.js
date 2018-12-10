@@ -3,7 +3,7 @@ const addnew = document.getElementById('add-new')
 const shareButton = document.getElementById('share')
 let photoLists = [];
 let currentUserName = ''
-const userId = 1; //fake userId for now 
+const userId = 1; //fake userId for now
 // let body = {
 //   user: 1,
 //   title: "Test",

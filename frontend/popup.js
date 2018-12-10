@@ -1,13 +1,5 @@
 // This popup.js file is the receive all the image urls data grabbed from the grabbed.js
 // and show them on the popup.html
-// var clickedUrl = {
-//     url:''
-// }
-//console.log("running:");
-
-// function clickedUrl(url) {
-//     this.url = url;
-// }
 
 var cu = {
     link:" "
@@ -98,11 +90,6 @@ function go_gallery(){
             chrome.tabs.create({url: newURL});
     });
 }
-// function url_work(){
-// 	var temp_u = document.getElementById('work');
-// 	temp_u.innerHTML += "44444";
-// }
 
-// export { clickedUrl} ;
 cu.link = urlLink;
 document.addEventListener('DOMContentLoaded', init);
