@@ -22,7 +22,7 @@ def is_json(json_data):
 
 
 class ImageCreateAPIView(generics.CreateAPIView): #ListCreateAPIView
-    permission_classes              = [permissions.IsAuthenticatedOrReadOnly,]
+    permission_classes              = [] #permissions.IsAuthenticatedOrReadOnly,
     #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
     queryset                        = Image.objects.all()
     serializer_class                = ImageCreateSerializer #ImageSerializer
