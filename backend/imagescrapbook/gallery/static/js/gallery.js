@@ -30,7 +30,7 @@ const userId = 1; //fake userId for now
 
 
 const fetchReq = () => {
-  fetch('')
+  fetch('localhost:8000/api/')
   .then(res => res.json())
   .then(res => {
     photoLists.push(res);
@@ -71,11 +71,11 @@ const addCard = (photoObject) => {
   cardFormat.appendChild(card)
   const cardHeader = document.createElement("h5");
   cardHeader.className = 'card-header'
-  cardHeader.innerHTML = `${currentUserName}`
+  cardHeader.innerHTML = `${photoObject.user.useername}`
   card.appendChild(cardHeader)
   const img = document.createElement('img')
   img.className = 'card-img-top'
-  img.src = `http://35.202.153.173:9000/image/${photoObject.imageurl}`
+  img.src = `${photoObject.imageurl}`
   img.alt = alt="Card image cap"
   card.appendChild(img)
   const cardBody = document.createElement('div')
@@ -100,5 +100,5 @@ const addCard = (photoObject) => {
 //
 document.addEventListener('DOMContentLoaded', function(userId) {
   fetchReq();
-  getUserName(userId);
+  // getUserName(userId);
 });

@@ -1,9 +1,14 @@
 const cardDeck = document.getElementById('card-deck')
 const addnew = document.getElementById('add-new')
 const shareButton = document.getElementById('share')
-const USER_ID = 1;
+const userId = 1;
 let myPhotos = [];
 let sharedPhotos = [];
+let sharedObject = {
+  sharedTo: '',
+  sharedBy: '',
+  Image: ''
+}
 
 // let body = {
 //   user: 1,
@@ -31,7 +36,7 @@ let sharedPhotos = [];
 
 
 const fetchMyPhotos = (userId) => {
-  fetch('http://35.224.129.143/api/')
+  fetch('http://localhost:8000/api/')
   .then(res => res.json())
   .then(res => {
     res.filter(photoObject => photoObject.user.id === userId);
@@ -41,19 +46,13 @@ const fetchMyPhotos = (userId) => {
 }
 
 const fetchSharedPhotos = (userId) => {
-      fetch()
+      fetch('http://localhost:8000/api/sharing')
       .then(res => res.json())
       .then(res => {
         res.filter(sharedObject => sharedObject.shared_by === userId);
-        sharedPhotos.push(res);
-        return fetch()                       //fetch userName //maybe you need hash map.
-      })
-      .then(res => res.json())
-      .then(res => {
-        sharedPhotos.forEach(sharedObject => {
+        sharedObject.sharedBy = res.shared_by;
+        sharedObject.sharedTo = res.shared_to;
 
-        })
-      })
 }
 
 // const getUserName = () => {
@@ -80,11 +79,11 @@ const addCard = (photoObject) => {
   cardFormat.appendChild(card)
   const cardHeader = document.createElement("h5");
   cardHeader.className = 'card-header'
-  cardHeader.innerHTML = `${photoObject.user.username}`
+  cardHeader.innerHTML = `${photoObject.user.useername}`
   card.appendChild(cardHeader)
   const img = document.createElement('img')
   img.className = 'card-img-top'
-  img.src = `http://35.202.153.173:9000/image/${photoObject.imageurl}`
+  img.src = `${photoObject.imageurl}`
   img.alt = alt="Card image cap"
   card.appendChild(img)
   const cardBody = document.createElement('div')
@@ -93,7 +92,7 @@ const addCard = (photoObject) => {
   cardTitle.className = 'card-title'
   cardTitle.innerHTML = `${photoObject.title}`
   cardTitle.appendChild(cardBody)
-  card.appendChild(cardTitl
+  card.appendChild(cardTitle)
   const cardFooter = document.createElement('div')
   cardFooter.className = 'card-footer';
   const small = document.createElement('small')
@@ -108,7 +107,7 @@ const addCard = (photoObject) => {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  fetchReq();
+  fetchMyPhotos(userId)
   // getUserName()
 
 
