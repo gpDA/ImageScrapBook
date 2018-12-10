@@ -15,6 +15,6 @@ urlpatterns = [
     path('login', TemplateView.as_view(template_name="registration/login.html"),name='login'),    
     path('logout', TemplateView.as_view(template_name="registration/logout.html"),name='logout'),    
     
-    path('', include('gallery.urls')),
-    path('', include('registration.urls')),
+    path('api/', include('gallery.urls')),
+    path('api/', include('registration.urls')),
 ]

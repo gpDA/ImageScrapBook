@@ -1,3 +1,36 @@
+body{
+  min-width: 300px;
+  overflow: scroll;
+}
+div > ul > li{
+  list-style-type: none !important;
+  padding:0;
+  margin:0;
+}
+li {
+  display: inline;
+}
+img{
+  border: 1px solid #000;
+  margin: 5px;
+}
 h1{
-    color: red;
+  text-align: center;
+}
+h3{
+  text-align: center;
+}
+.btn {
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    padding: 6px 13px;
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    border-radius: 9px;
+
 }

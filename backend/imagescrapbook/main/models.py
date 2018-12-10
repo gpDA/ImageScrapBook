@@ -3,13 +3,10 @@ from django.conf import settings
 from django.core.validators import URLValidator
 
 
-def upload_image(instance, filename):
-    return "uploads/{user}/{filename}".format(user=instance.user, filename=filename)
-
 class Image(models.Model):
     user            = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title           = models.CharField(max_length=150)
-    image           = models.ImageField(upload_to=upload_image, null=True, blank=True) # dummy for forms
+    image           = models.ImageField(null=True, blank=True) # dummy for forms
     extension       = models.CharField(max_length=10) # likewise
     imageurl        = models.TextField(blank=True, default='')
     #thumanail 1) PROCESSING? 2) SAVED?

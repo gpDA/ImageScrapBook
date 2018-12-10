@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from main.models import Image, Tag, Sharing
-# from django.contrib.auth.models import User
-# from registration.serializers import UserSerializer
+from django.contrib.auth.models import User
+from registration.serializers import UserSerializer
 #from main.serializers import RegisterSerializer
 import thumbnail
 import uuid
@@ -12,31 +12,20 @@ Serializers --> JSON
 Serializers --> Validation data
 '''
 
+class ImageCreateSerializer(serializers.ModelSerializer):
 
-class ImageSerializer(serializers.ModelSerializer):
-
-    #ReadonlyField is untyped
-    #NESTED SERIALIZE
-
-    #user      = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Image
         fields = [
             'id',
-            #'user',
+            'user',
             'title',
             'image',
             'extension',
             'timestamp',
-            'privacy',
             'thumbnail_url',
             'imageurl',
         ]
-    '''
-    def get_user(self,obj):
-        qs = User.objects.all()
-        return RegisterSerializer(qs, many=True).data
-    '''
     
     
 
@@ -73,30 +62,32 @@ class ImageSerializer(serializers.ModelSerializer):
         thumbnail.thumbnailify.delay(obj.id, imgurl, (200, 200))
         return obj
 
-    '''
-    def get_owner(self, obj):
-        qs = User.objects.filter(user=obj)
-        return UserSerializer(qs, many=True).data
-    '''
 
 
-'''
-class SharingSerializer(serializers.ModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
 
-    #images      = serializers.SerializerMethodField(read_only=True)
-    #users      = serializers.SerializerMethodField(read_only=True)
+    #ReadonlyField is untyped
+    #NESTED SERIALIZE
+
+    user      = serializers.SerializerMethodField(read_only=True)
     class Meta:
-        model = Sharing
-        fields = '__all__'
-
-    def get_images(self,obj):
-        qs = Image.objects.all()
-        return ImageSerializer(qs, many=True).data
-
-    def get_users(self,obj):
-        qs = User.objects.all()
-        return UserSerializer(qs, many=True).data        
-''' 
+        model = Image
+        fields = [
+            'id',
+            'user',
+            'title',
+            'image',
+            'extension',
+            'timestamp',
+            'thumbnail_url',
+            'imageurl',
+        ]
+    
+    
+    def get_user(self,obj):
+        qs = User.objects.filter(image=obj)
+        #qs = Image.objects.filter(user=obj).order_by("-timestamp")[:10]
+        return UserSerializer(qs, many=True).data
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -107,7 +98,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'tagname',
-            'images'
+            #'images'
 
         ]
 

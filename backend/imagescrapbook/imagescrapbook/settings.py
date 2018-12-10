@@ -51,6 +51,8 @@ INSTALLED_APPS = [
 
     #local
     'main',
+    'gallery',
+    'registration',
 
     #3rd party
     'rest_framework',

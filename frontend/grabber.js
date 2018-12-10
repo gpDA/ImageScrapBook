@@ -51,7 +51,6 @@ function removeDuplicates(url_collection){
 }
 
 function main(){
-	console.log("main called");
 	var imageUrls = parseUrls();
 	if (imageUrls){
 		url_collection = checkImageSize(imageUrls);
@@ -62,8 +61,8 @@ function main(){
 				{directive: "setImages", data: url_collection},
 				 function(response) {
 		        console.log("main response: ", response.backgroundResponse);
-						console.log("url_collection: ", url_collection);
 		    });
+				//console.log("sent data to background.js");
 		}
 		else{
 			noResponse();
@@ -72,6 +71,7 @@ function main(){
 	else{
 		noResponse();
 	}
+
 }
 
 main()

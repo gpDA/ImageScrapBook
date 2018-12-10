@@ -8,6 +8,7 @@ from .permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_object_or_404
 from main.models import Image, Tag, Sharing
 from main.serializers import ImageSerializer, TagSerializer
+from main.serializers import ImageCreateSerializer
 
 import json
 
@@ -19,8 +20,31 @@ def is_json(json_data):
     return True
 
 
+class ImageCreateAPIView(generics.CreateAPIView): #ListCreateAPIView
+    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
+    #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+    queryset                        = Image.objects.all()
+    serializer_class                = ImageCreateSerializer #ImageSerializer
+
+
+    def get_queryset(self):
+        qs = Image.objects.all()
+        query = self.request.GET.get('q')
+        if query is not None:
+            qs = qs.filter(title__icontains=query) #query by title?? or multiple queries
+        return qs
+
+    #otherwise, if we created image, there is no way of associating the user that created it
+    #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
+    #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
+    
+    def perform_create(self, serializer):
+        # `create() method` has additional `owner` field (along with the validated data from the request)
+        serializer.save(owner=self.request.user)
+
+
 #generics.ListAPIView,mixins.CreateModelMixin
-class ImageAPIView(generics.ListCreateAPIView):
+class ImageAPIView(generics.ListAPIView): #ListCreateAPIView
     permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
     #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
     queryset                        = Image.objects.all()
