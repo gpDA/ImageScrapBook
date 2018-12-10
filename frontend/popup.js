@@ -27,6 +27,8 @@ function startLoading(){
  chrome.extension.getBackgroundPage().console.log("Popup clicked!");
 }
 
+var temp = document.getElementById('work');
+
 function get_urls() {
 
 
@@ -74,7 +76,6 @@ function get_urls() {
 //      web page has **completely loaded** all content (including images, script files, CSS files, etc.).
 window.onload = get_urls();
 
-
 //=============BUTTONS on HTML===============
 
 //TODO: direct to my gallery/public gallery
@@ -97,6 +98,10 @@ function go_gallery(){
             chrome.tabs.create({url: newURL});
     });
 }
+// function url_work(){
+// 	var temp_u = document.getElementById('work');
+// 	temp_u.innerHTML += "44444";
+// }
 
 // export { clickedUrl} ;
 cu.link = urlLink;
