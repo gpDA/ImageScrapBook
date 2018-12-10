@@ -5,29 +5,6 @@ const USER_ID = 1;
 let myPhotos = [];
 let sharedPhotos = [];
 
-// function getBase64FromImageUrl(url) {
-//     var img = new Image();
-//
-//     img.setAttribute('crossOrigin', 'anonymous');
-//
-//     img.onload = function () {
-//         var canvas = document.createElement("canvas");
-//         canvas.width =this.width;
-//         canvas.height =this.height;
-//
-//         var ctx = canvas.getContext("2d");
-//         ctx.drawImage(this, 0, 0);
-//
-//         var dataURL = canvas.toDataURL("image/png");
-//
-//         alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-//     };
-//
-//     img.src = url;
-//     console.log(img.src)
-// }
-//
-// getBase64FromImageUrl("1-917b34c5-53cb-48ff-bb86-7e755cc56889.jpeg")
 // let body = {
 //   user: 1,
 //   title: "Test",
@@ -69,11 +46,13 @@ const fetchSharedPhotos = (userId) => {
       .then(res => {
         res.filter(sharedObject => sharedObject.shared_by === userId);
         sharedPhotos.push(res);
-        return fetch()
+        return fetch()                       //fetch userName //maybe you need hash map.
       })
       .then(res => res.json())
       .then(res => {
+        sharedPhotos.forEach(sharedObject => {
 
+        })
       })
 }
 

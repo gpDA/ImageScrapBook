@@ -1,0 +1,33 @@
+
+<!doctype html>
+
+<html>
+  <head>
+     <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <h1>ImageScrapBook</h1>
+    <hr>
+    <img id="myImage">
+    <hr>
+    <script>
+
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var img = document.getElementById('myImage');
+
+    var myImg = new Image();
+    img.onload = function() {
+       context.drawImage(myImg, 0, 0);
+       var theData = context.getImageData(0, 0, img.width, img.height);
+       console.log("the Data : ", theData.data);
+    };
+    img.src = 'https://i.stack.imgur.com/kQQAl.jpg?s=128&g=1&g&s=32';
+
+
+
+    </script>
+
+  </body>
+
+</html>

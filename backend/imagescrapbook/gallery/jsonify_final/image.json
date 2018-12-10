@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "user": [
+            {
+                "id": 1,
+                "username": "geonpyung22",
+                "email": "geonpyung22@gmail.com"
+            }
+        ],
+        "title": "title22",
+        "image": null,
+        "extension": "jpg",
+        "timestamp": "2018-12-06T00:19:03.611891Z",
+        "thumbnail_url": "200x200_1-a385c456-6fd8-481f-81d3-52074169834b.jpg",
+        "imageurl": "1-a385c456-6fd8-481f-81d3-52074169834b.jpg"
+    }
+]

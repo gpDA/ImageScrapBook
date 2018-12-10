@@ -2,29 +2,8 @@ const cardDeck = document.getElementById('card-deck')
 const addnew = document.getElementById('add-new')
 const shareButton = document.getElementById('share')
 let photoLists = [];
-// function getBase64FromImageUrl(url) {
-//     var img = new Image();
-//
-//     img.setAttribute('crossOrigin', 'anonymous');
-//
-//     img.onload = function () {
-//         var canvas = document.createElement("canvas");
-//         canvas.width =this.width;
-//         canvas.height =this.height;
-//
-//         var ctx = canvas.getContext("2d");
-//         ctx.drawImage(this, 0, 0);
-//
-//         var dataURL = canvas.toDataURL("image/png");
-//
-//         alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-//     };
-//
-//     img.src = url;
-//     console.log(img.src)
-// }
-//
-// getBase64FromImageUrl("1-917b34c5-53cb-48ff-bb86-7e755cc56889.jpeg")
+let currentUserName = ''
+const userId = 1; //fake userId for now
 // let body = {
 //   user: 1,
 //   title: "Test",
@@ -51,11 +30,20 @@ let photoLists = [];
 
 
 const fetchReq = () => {
-  fetch('http://35.224.129.143/api/')
+  fetch('')
   .then(res => res.json())
   .then(res => {
     photoLists.push(res);
     generateCards(photoLists[0])
+  })
+}
+
+const getUserName = (userId) => {
+  fetch('')
+  .then(res => res.json())
+  .then(res => res.user.filter(user => user.id === userId); return res.user)
+  .then(res => {
+    currentUserName = res.user.username
   })
 }
 
@@ -83,7 +71,7 @@ const addCard = (photoObject) => {
   cardFormat.appendChild(card)
   const cardHeader = document.createElement("h5");
   cardHeader.className = 'card-header'
-  cardHeader.innerHTML = `${photoObject.user.username}`
+  cardHeader.innerHTML = `${currentUserName}`
   card.appendChild(cardHeader)
   const img = document.createElement('img')
   img.className = 'card-img-top'
@@ -96,7 +84,7 @@ const addCard = (photoObject) => {
   cardTitle.className = 'card-title'
   cardTitle.innerHTML = `${photoObject.title}`
   cardTitle.appendChild(cardBody)
-  card.appendChild(cardTitl
+  card.appendChild(cardTitle)
   const cardFooter = document.createElement('div')
   cardFooter.className = 'card-footer';
   const small = document.createElement('small')
@@ -109,13 +97,8 @@ const addCard = (photoObject) => {
   cardFooter.appendChild(button)
   card.appendChild(cardFooter)
 }
-
-document.addEventListener('DOMContentLoaded', function() {
+//
+document.addEventListener('DOMContentLoaded', function(userId) {
   fetchReq();
-  // getUserName()
-
-
-
-
-
+  getUserName(userId);
 });
