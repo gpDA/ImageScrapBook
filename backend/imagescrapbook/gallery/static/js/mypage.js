@@ -4,34 +4,6 @@ const shareButton = document.getElementById('share')
 const userId = 1;
 let myPhotos = [];
 let sharedPhotos = [];
-let sharedObject = {
-  sharedTo: '',
-  sharedBy: '',
-  Image: ''
-}
-
-// let body = {
-//   user: 1,
-//   title: "Test",
-//   image: getBase64FromImageUrl(url),
-//   extension: url.split('.').slice(-1).join(''),
-//   privacy: "false",
-//   thumbnail_url: "",
-//   imageurl: ""
-//
-// }
-// const fetchPost = (body) => {
-//   fetch('http://35.224.129.143/api/', {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Accept: 'application/json',
-//     },
-//     body: JSON.stringify(body)
-//   })
-//   .then(res => res.json())
-//   .then(res => console.log(res))
-// }
 
 
 
@@ -50,19 +22,13 @@ const fetchSharedPhotos = (userId) => {
       .then(res => res.json())
       .then(res => {
         res.filter(sharedObject => sharedObject.shared_by === userId);
-        sharedObject.sharedBy = res.shared_by;
-        sharedObject.sharedTo = res.shared_to;
-
+        sharedPhotos.push(res);
+        generateShareCards(sharedPhotos[0])
 }
 
-// const getUserName = () => {
-//   fetch('http://35.224.129.143/user')
-//   .then(res => res.json())
-//   .then(res => {
-//     console.log(res)
-//   })
-// }
-
+const generateShareCards = (sharedPhotos) => {
+  sharedPhotos.forEach((obj) => addSharedCard(obj))
+}
 
 const generateCards = (photoLists) => {
   for (let i = 0; i < photoLists.length; i++) {
@@ -104,6 +70,10 @@ const addCard = (photoObject) => {
   button.innerHTML = 'Share'
   cardFooter.appendChild(button)
   card.appendChild(cardFooter)
+}
+
+const addSharedCard = () => {
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {
