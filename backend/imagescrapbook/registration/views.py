@@ -20,7 +20,10 @@ from rest_framework.generics import CreateAPIView, ListAPIView, GenericAPIView
 from rest_auth.app_settings import (TokenSerializer,
                                     JWTSerializer,
                                     create_token)
-from rest_auth.utils import jwt_encode                                    
+from rest_auth.utils import jwt_encode
+# from rest_framework.authtoken.views import ObtainAuthToken
+# from rest_framework.authtoken.models import Token
+# from rest_framework.response import Response                                    
 
 import json
 
@@ -40,7 +43,8 @@ class RegisterView(generics.CreateAPIView): #generics.ListCreateAPIView
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)                        
+        headers = self.get_success_headers(serializer.data)       
+        print(headers)                 
         return Response(self.get_response_data(user),
                         status=status.HTTP_201_CREATED,
                         headers=headers)        
@@ -50,7 +54,24 @@ class RegisterView(generics.CreateAPIView): #generics.ListCreateAPIView
         user.is_active = True
         user.set_password(serializer['password'])
         user.save()
-        return user                        
+        return user   
+
+
+
+# class CustomAuthToken(ObtainAuthToken):
+
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.serializer_class(data=request.data,
+#                                            context={'request': request})
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.validated_data['user']
+#         password = serializer.validated_data['password']
+#         token, created = Token.objects.get_or_create(user=user)
+#         return Response({
+#             'token': token.key,
+#             'user_id': user.pk,
+#             'email': user.email
+#         })                         
 
 
 

@@ -11,7 +11,9 @@
   <div class="row">
     <h3>Signup</h3><hr/>
 <!-- Signup form -->
-<form class="form-horizontal ajax-post" id="signup" role="form" method="post" action="{% url 'rest_register' %}">{% csrf_token %}
+<!-- action="{% url 'rest_register' %}" -->
+<form class="form-horizontal" id="signup" role="form">
+  {% csrf_token %}
     <div class="form-group">
       <label for="email" class="col-sm-2 control-label">Email</label>
       <div class="col-sm-10">
@@ -42,45 +44,86 @@
   
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" id='signup_form'>Sign up</button>
+        <div class="btn btn-default" id='signup_form'>Sign up</div>
       </div>
     </div>
   
   </form>
   
   </div>
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <!-- <script src="jquery-3.3.1.min.js"></script>       -->
   <script>
-        $("#signup_form").on("click", function(e) {
-            var username = $("#username").val();
-            var password = $("#password").val();
-            
-            console.log('hi');
-            // "/user/create"
-            $.post("/rest-auth/registration", {"username": username, "password": password})
-            .success(function(data) {
-                // var token = data["token"];
-                // document.cookie = 'token='+token+";path=/";
-                localStorage.set('token', data['token']);
-                window.location.href = "http://localhost:8000/login";
-            });
-            // token = localStorage.get('token)
 
-            /*
-            $.ajax({
-              url: "http://localhost:8000/api/read",
-              headers: {
-                'Authorization': "Token: " + token
-              },
-              success: function (data) {
-                console.log(response)
-              }
-            })
-            */
-        });    
+  // document.addEventListener('DOMContentLoaded', init);
+
+  // function init() {
+    // var button = document.querySelector("#signup_form");
+
+    $('#signup_form').click(function(){
+      var username = $('#username').val();
+      var email = $('#email').val();
+      var password = $('#password').val();
+      $.ajax({
+        type: "POST",
+        url: '/api/rest-auth/registration',
+        data: {
+          'username': username,
+          'email': email,
+          'password': password,
+        },
+        dataType: 'json',
+        success: function (data) {
+          //token
+          //localStorage.getItem("lastname");
+          localStorage.setItem("token", data["key"]);
+          window.location.replace("/login");
+        }
+        })
+        });
+
+
+
+      // $.ajax("http://localhost:8000/api/rest-auth/registration", {
+      //   method: "post",
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+
+      //   //make sure to serialize your JSON body
+      //   body: JSON.stringify({
+      //     username: username,
+      //     password: password,
+      //   })
+      // })
+      // .then( (response) => { 
+      //   console.log(response)
+        //do something awesome that makes the world a better place
+      // }); 
+
+      // fetch("", {  
+      //     method: 'POST',  
+      //     headers: {
+      //       'Accept': 'application/json, text/plain, */*',
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //     username: username,
+      //     password: password,
+      //   })
+      // })
+
+      // .then(res => res.json())
+      // .then(data => function (data) {  
+      //   if (!data.ok) { console.log(data)  }
+      //   console.log('Request success: ', data);  
+      // })  
+      // .catch(function (error) {  
+      //   console.log('Request failure: ', error);  
+      // });                   
+    // });                
+    // }
         </script>  
 
 </body>

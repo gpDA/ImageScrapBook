@@ -91,8 +91,6 @@ class ImageSerializer(serializers.ModelSerializer):
 
 class ImageReadSerializer(serializers.ModelSerializer):
 
-    #ReadonlyField is untyped
-    #NESTED SERIALIZE
 
     class Meta:
         model = Image

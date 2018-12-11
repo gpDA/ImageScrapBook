@@ -17,6 +17,13 @@
             <input name="username" type="text" class="form-control" id="username" placeholder="Username">
         </div>
         </div>
+
+        <!-- <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input name="email" type="email" class="form-control" id="email" placeholder="email">
+        </div>
+        </div>         -->
     
         <div class="form-group">
         <label for="password" class="col-sm-2 control-label">Password</label>
@@ -27,26 +34,56 @@
     
         <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" id='login_form'>Login</button>
+            <div class="btn btn-default" id='login_form'>Login</div>
         </div>
         </div>
     
         <div class="form-group api-response"></div>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script>
-    $("#login_form").on("click", function(e) {
-        var username = $("#username").val();
-        var password = $("#password").val();
+  
+    console.log(localStorage.getItem("token"));
+      $('#login_form').click(function(){
+        var username = $('#username').val();
+        // var email = $('#email').val();
+        var password = $('#password').val();
+        $.ajax({
+          type: "POST",
+          url: '/api/get_auth_token',
+          data: {
+            'username': username,
+            // 'email': email,
+            'password': password
+          },
+          dataType: 'json',
+          success: function (data) {
+            //token
 
-        $.post("/accounts/get_auth_token/", {"username": username, "password": password})
-        .success(function(data) {
-            var token = data["token"];
-            document.cookie = 'token='+token+";path=/";
-            window.location.href = "/gallery/";
-        });
-    });    
+            user_token = localStorage.getItem("token");
+            console.log(user_token)
+            // if(data == user_token)
+            // window.location.replace("/gallery");
+          }
+          })
+          });
+          </script>
+          
+    <script>
+    // $("#login_form").on("click", function(e) {
+    //     var username = $("#username").val();
+    //     var password = $("#password").val();
+
+    //     $.post("/accounts/get_auth_token/", {"username": username, "password": password})
+    //     .success(function(data) {
+    //         var token = data["token"];
+    //         document.cookie = 'token='+token+";path=/";
+    //         window.location.href = "/gallery/";
+    //     });
+    // });    
     </script>
+    
 
       
 </body>

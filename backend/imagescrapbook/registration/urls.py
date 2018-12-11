@@ -22,6 +22,8 @@ urlpatterns = [
     path('rest-auth/registration', RegisterView.as_view(), name='rest_register'),
     
     path('get_auth_token', rest_framework_views.obtain_auth_token, name='get_auth_token'),
+    path('obtain_token_auth', rest_framework_views.obtain_auth_token, name='get_auth_token'),
+
     path('user', UserAPIView.as_view()),
 
     path('user/<slug:username>', UserAPIDetailView.as_view()),
