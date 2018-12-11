@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Shared with me </h1>
+{% for shared in object_list %}
+<div>
+  <a href='{{ shared.image.get_absolute_url }}'>
+    <img src="http://minio:9000/thumb/{{ shared.image.thumbnail_url }}">
+    <div>{{ shared.image.title }} by {{ shared.image.user.username }}</div>
+  </a>
+  <div>(Shared by {{ shared.shared_by.username }})</div>
+</div>
+{% endfor %}
+{% endblock content %}

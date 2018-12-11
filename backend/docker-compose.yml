@@ -7,6 +7,8 @@ services:
     hostname: somerabbit
     volumes:
       - rabbit-storage:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
   flowerbox:
     image: skairunner/flower:latest
     ports:
@@ -61,7 +63,7 @@ services:
       POSTGRES_PASSWORD: user
       POSTGRES_DB: imagescrapbook
     ports:
-      - "2345:5432"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
   appserver:

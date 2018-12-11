@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Sharing image</h2>
+<form method='post'>
+  {% csrf_token %}
+  <div>
+    <h3>{{ image.title }}</h3>
+    <img src="http://minio:9000/thumb/{{ image.thumbnail_url }}">
+  </div>
+  <div>
+    Share to
+    {{ form.shared_to }}
+  </div>
+  <input type='submit' value='Share'>
+</form>
+{% endblock content %}

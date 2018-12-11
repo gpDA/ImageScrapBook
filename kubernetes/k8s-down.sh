@@ -1,3 +1,6 @@
+# one-off job
+kubectl delete job appserver-migrate
+
 # services deleted
 kubectl delete service appserver flowerbox minio postgres rabbit
 

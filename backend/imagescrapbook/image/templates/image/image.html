@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ object.title }}</h1>
+<img style='width:90%' src="http://minio:9000/image/{{ object.imageurl }}">
+<div>Posted by: {{ object.user.username }} at {{ object.timestamp }}</div>
+<a href='{% url "share" object.id %}'><button>Share</button></a>
+{% endblock content %}

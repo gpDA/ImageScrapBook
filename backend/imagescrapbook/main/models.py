@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import URLValidator
+from django.urls import reverse
 
 
 class Image(models.Model):
@@ -18,6 +19,9 @@ class Image(models.Model):
     def __str__(self):
         return str(self.title)[:50]
 
+    def get_absolute_url(self):
+        return reverse('viewimage', args=[self.id])
+
     class Meta:
         verbose_name = 'Image Repository'
 
@@ -26,7 +30,7 @@ class Image(models.Model):
 class Sharing(models.Model):
     shared_to            = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_shared_to', on_delete=models.CASCADE)    
     shared_by            = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(class)s_shared_by', on_delete=models.CASCADE)
-    image                = models.ForeignKey(Image, related_name='%(class)s_image', on_delete=models.CASCADE)    
+    image                = models.ForeignKey(Image, related_name='%(class)s_image', on_delete=models.CASCADE)
 
 
 class Tag(models.Model):

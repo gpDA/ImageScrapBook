@@ -8,12 +8,11 @@ urlpatterns = [
     path('api/', include('main.urls')),
 
 
-    path('gallery', TemplateView.as_view(template_name="gallery/public.html")),
-    path('gallery111', TemplateView.as_view(template_name="gallery/private.html")), #need to be gallery/<userId>
-
+    path('gallery/', include('gallery_django.urls')),
     path('signup', TemplateView.as_view(template_name="registration/signup.html"), name='signup'),    
-    path('login', TemplateView.as_view(template_name="registration/login.html"), name='login'),    
-    path('logout', TemplateView.as_view(template_name="registration/logout.html"), name='logout'),    
+    path('login/', include('login.urls')),
+    path('logout', TemplateView.as_view(template_name="registration/logout.html"),name='logout'),
+    path('image/', include('image.urls')),
     
     path('api/', include('gallery.urls')),
     path('api/', include('registration.urls')),
