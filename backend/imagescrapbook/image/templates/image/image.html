@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+img {
+  width: 80%;
+}
+</style>
 <h1>{{ object.title }}</h1>
-<img style='width:90%' src="http://minio:9000/image/{{ object.imageurl }}">
-<div>Posted by: {{ object.user.username }} at {{ object.timestamp }}</div>
+<figure class='figure'>
+  {% include 'image_fragment.html' with bucket='image' url=object.imageurl %}
+  <figcaption class='figure-caption-text-right'>Posted by: {{ object.user.username }} at {{ object.timestamp }}</figcaption>
+</figure>
 <a href='{% url "share" object.id %}'><button>Share</button></a>
 {% endblock content %}

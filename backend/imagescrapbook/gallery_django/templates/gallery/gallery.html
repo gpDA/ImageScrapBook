@@ -2,17 +2,21 @@
 
 {% block content %}
 {% ifequal gallerytype 'public' %}
-<h1>Public Gallery</h1>
+<div><h1>Public Gallery</h1></div>
 {% endifequal %}
 {% ifequal gallerytype 'user' %}
-<h1>{{ username }}'s Gallery</h1>
+<div><h1>{{ username }}'s Gallery</h1></div>
 {% endifequal %}
-{% for image in object_list %}
 <div>
-  <a href='{{ image.get_absolute_url }}'>
-    <img src="http://minio:9000/thumb/{{ image.thumbnail_url }}">
-    <div>{{ image.title }} by {{ image.user.username }}</div>
-  </a>
+  {% for image in object_list %}
+  <div class='col-lg-3 col-md-4 col-xs-6 thumb'>
+    <a href='{{ image.get_absolute_url }}'>
+      <figure class='figure'>
+        {% include 'image_fragment.html' with bucket='thumb' url=image.thumbnail_url %}
+        <figcaption class='figure-caption-text-left'>{{ image.title }} by {{ image.user.username }}</figcaption>
+      </figure>
+    </a>
+  </div>
+  {% endfor %}
 </div>
-{% endfor %}
 {% endblock content %}
