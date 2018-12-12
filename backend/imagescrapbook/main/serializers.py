@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import Image, Tag
+from main.models import Image
 from django.contrib.auth.models import User
 from registration.serializers import UserSerializer
 import thumbnail
