@@ -5,7 +5,7 @@ from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
-    path('', RedirectView.as_view(url=reverse_lazy('gallery'))),
+    path('', RedirectView.as_view(url=reverse_lazy('publicgallery'))),
     path('admin', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
     path('api/', include('main.urls')),
@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout', TemplateView.as_view(template_name="registration/logout.html"), name='logout'),
     path('image/', include('image.urls')),
     path('api/', include('registration.urls')),
+    path('gallery/', include('gallery_django.urls'))
 ]
