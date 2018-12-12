@@ -8,7 +8,6 @@ urlpatterns = [
     path('api/', include('main.urls')),
 
 
-    path('gallery/', include('gallery_django.urls')),
     path('signup', TemplateView.as_view(template_name="registration/signup.html"), name='signup'),    
     path('login/', include('login.urls')),
     path('logout', TemplateView.as_view(template_name="registration/logout.html"),name='logout'),
