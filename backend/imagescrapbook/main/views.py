@@ -1,17 +1,10 @@
-from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.authtoken.models import Token
-from rest_framework import generics, mixins, permissions, status
-from rest_framework.response import Response
-from .permissions import IsOwnerOrReadOnly
-#from accounts.api.permissions import IsOwnerOrReadOnly
-from django.shortcuts import get_object_or_404
-from main.models import Image, Tag, Sharing
-from main.serializers import ImageSerializer, TagSerializer
+from rest_framework import generics, permissions
+from main.models import Image
 from main.serializers import ImageCreateSerializer
 from main.serializers import ImageReadSerializer
 
 import json
+
 
 def is_json(json_data):
     try:
@@ -21,12 +14,10 @@ def is_json(json_data):
     return True
 
 
-class ImageCreateAPIView(generics.CreateAPIView): #ListCreateAPIView
-    permission_classes              = [] #permissions.IsAuthenticatedOrReadOnly,
-    #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+class ImageCreateAPIView(generics.CreateAPIView):
+    permission_classes              = []
     queryset                        = Image.objects.all()
-    serializer_class                = ImageCreateSerializer #ImageSerializer
-
+    serializer_class                = ImageCreateSerializer
 
     def get_queryset(self):
         qs = Image.objects.all()
@@ -35,23 +26,12 @@ class ImageCreateAPIView(generics.CreateAPIView): #ListCreateAPIView
             qs = qs.filter(title__icontains=query) #query by title?? or multiple queries
         return qs
 
-    #otherwise, if we created image, there is no way of associating the user that created it
-    #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
-    #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
-    '''
-    def perform_create(self, serializer):
-        # `create() method` has additional `owner` field (along with the validated data from the request)
-        serializer.save(owner=self.request.user)
-    '''
 
-#generics.ListAPIView,mixins.CreateModelMixin
-class ImageAPIView(generics.ListAPIView): #ListCreateAPIView
-    permission_classes              = [] #[permissions.IsAuthenticatedOrReadOnly,]
-    #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
+class ImageAPIView(generics.ListAPIView):
+    permission_classes              = []
     queryset                        = Image.objects.all()
     serializer_class                = ImageSerializer
 
-
     def get_queryset(self):
         qs = Image.objects.all()
         query = self.request.GET.get('q')
@@ -59,17 +39,12 @@ class ImageAPIView(generics.ListAPIView): #ListCreateAPIView
             qs = qs.filter(title__icontains=query) #query by title?? or multiple queries
         return qs
 
-    #otherwise, if we created image, there is no way of associating the user that created it
-    #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
-    #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
 
-class ImageReadAPIView(generics.ListAPIView): #ListCreateAPIView
+class ImageReadAPIView(generics.ListAPIView):
     permission_classes              = [permissions.IsAuthenticated]
-    #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
     queryset                        = Image.objects.all()
     serializer_class                = ImageReadSerializer
 
-
     def get_queryset(self):
         qs = Image.objects.all()
         query = self.request.GET.get('q')
@@ -77,14 +52,9 @@ class ImageReadAPIView(generics.ListAPIView): #ListCreateAPIView
             qs = qs.filter(title__icontains=query) #query by title?? or multiple queries
         return qs
 
-    #otherwise, if we created image, there is no way of associating the user that created it
-    #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
-    #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
-    
-#mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.RetrieveAPIView    
+
 class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes          = [] #[permissions.IsAuthenticatedOrReadOnly, ]
-    #authentication_classes      = [] #[SessionAuthentication] #OR Json Web Token Authentication
+    permission_classes          = []
 
     queryset                    = Image.objects.all()
     serializer_class            = ImageSerializer
@@ -98,32 +68,3 @@ class ImageAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-
-
-
-# class SharingAPIView(generics.ListCreateAPIView):
-#     permission_classes              = [] #[permissions.IsAuthenticated,]
-#     #authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
-#     queryset                        = Sharing.objects.all()
-#     serializer_class                = SharingSerializer    
-    
-
-
-class TagAPIView(generics.ListCreateAPIView):
-    permission_classes              = [] #[permissions.IsAuthenticated,]
-    authentication_classes          = [] #[SessionAuthentication] #Json Web Token Authentication
-    queryset                        = Tag.objects.all()
-    serializer_class                = TagSerializer
-
-    
-    #otherwise, if we created image, there is no way of associating the user that created it
-    #the User is not sent as part of the serialized representation, but is instead a property of the incoming request
-    #OVERRIDE `perform_create()` method that allows us to modify how the instance save is managed
-    
-    '''owner (user / after login OWNER)'''
-
-    '''
-    def perform_create(self, serializer):
-        # `create() method` has additional `owner` field (along with the validated data from the request)
-        serializer.save(owner=self.request.user)
-    '''        

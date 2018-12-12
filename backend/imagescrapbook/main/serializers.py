@@ -1,12 +1,10 @@
 from rest_framework import serializers
-from main.models import Image, Tag, Sharing
+from main.models import Image, Tag
 from django.contrib.auth.models import User
 from registration.serializers import UserSerializer
-#from main.serializers import RegisterSerializer
 import thumbnail
 import uuid
 import boto3
-import sys
 '''
 Serializers --> JSON
 Serializers --> Validation data
@@ -26,8 +24,6 @@ class ImageCreateSerializer(serializers.ModelSerializer):
             'thumbnail_url',
             'imageurl',
         ]
-    
-    
 
     def validate(self, data):
         title = data.get('title', None)
@@ -63,7 +59,6 @@ class ImageCreateSerializer(serializers.ModelSerializer):
         return obj
 
 
-
 class ImageSerializer(serializers.ModelSerializer):
 
     #ReadonlyField is untyped
@@ -82,12 +77,13 @@ class ImageSerializer(serializers.ModelSerializer):
             'thumbnail_url',
             'imageurl',
         ]
-    
-    
+
+
     def get_user(self,obj):
         qs = User.objects.filter(image=obj)
         #qs = Image.objects.filter(user=obj).order_by("-timestamp")[:10]
         return UserSerializer(qs, many=True).data
+
 
 class ImageReadSerializer(serializers.ModelSerializer):
 
@@ -103,25 +99,3 @@ class ImageReadSerializer(serializers.ModelSerializer):
             'thumbnail_url',
             'imageurl',
         ]
-    
-
-class TagSerializer(serializers.ModelSerializer):
-
-    #images      = serializers.SerializerMethodField(read_only=True)
-    class Meta:
-        model = Tag
-        fields = [
-            'id',
-            'tagname',
-            #'images'
-
-        ]
-
-    def validate(self, data):
-        tagname = data.get('tagname', None)
-        if tagname == '':
-            tagname = None
-
-        if tagname is None:
-            raise serializers.ValidationError('tagname is required.')
-        return data

@@ -54,24 +54,7 @@ class RegisterView(generics.CreateAPIView): #generics.ListCreateAPIView
         user.is_active = True
         user.set_password(serializer['password'])
         user.save()
-        return user   
-
-
-
-# class CustomAuthToken(ObtainAuthToken):
-
-#     def post(self, request, *args, **kwargs):
-#         serializer = self.serializer_class(data=request.data,
-#                                            context={'request': request})
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.validated_data['user']
-#         password = serializer.validated_data['password']
-#         token, created = Token.objects.get_or_create(user=user)
-#         return Response({
-#             'token': token.key,
-#             'user_id': user.pk,
-#             'email': user.email
-#         })                         
+        return user
 
 
 
@@ -80,7 +63,7 @@ class UserAPIView(generics.ListAPIView):
     permission_classes              = [] #permissions.IsAuthenticated
     # authentication_classes          = [] #[SessionAuthentication]
     queryset                        = User.objects.all()
-    serializer_class                = UserSerializer   
+    serializer_class                = UserSerializer
 
     def post(self, request, format='json'):
         serializer = UserSerializer(data=request.data)
