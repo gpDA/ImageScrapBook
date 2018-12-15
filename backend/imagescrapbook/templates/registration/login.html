@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="../../static/css/semantic.min.css" rel="stylesheet" type="text/css">
+  <link href="../../static/css/index1.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,7 +12,7 @@
 
     <!-- Signup form -->
     <!-- action="{% url 'rest_login' %} -->
-    <form class="form-horizontal ajax-post" role="form">{% csrf_token %}
+    <!-- <form class="form-horizontal ajax-post" role="form">{% csrf_token %}
         <div class="form-group">
         <label for="username" class="col-sm-2 control-label">Username</label>
         <div class="col-sm-10">
@@ -18,32 +20,67 @@
         </div>
         </div>
 
-        <!-- <div class="form-group">
+         <div class="form-group">
             <label for="email" class="col-sm-2 control-label">Email</label>
         <div class="col-sm-10">
             <input name="email" type="email" class="form-control" id="email" placeholder="email">
         </div>
         </div>         -->
-    
+<!--
         <div class="form-group">
         <label for="password" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
             <input name="password" type="password" class="form-control" id="password" placeholder="Password">
         </div>
         </div>
-    
+
         <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <div class="btn btn-default" id='login_form'>Login</div>
         </div>
         </div>
-    
+
         <div class="form-group api-response"></div>
-    </form>
+    </form> -->
+
+
+    <div class="ui middle aligned center aligned grid">
+      <div class="column">
+        <h2 class="ui image header">
+          <div class="content">
+            Log-in to your account
+          </div>
+        </h2>
+        <form role = "form" method="get" class="form-horizontal ajax-post">
+          <div class="ui stacked secondary  segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="username" placeholder="Username" class="form-control" id="username">
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+              </div>
+            </div>
+            <br>
+            <div class="ui fluid large yellow submit button" id='login_form'>Login</div>
+          </div>
+
+        </form>
+        <div class="ui message">
+          New to us? <a href="https://s.codepen.io/voltron2112/debug/PqrEPM?">Register</a>
+        </div>
+      </div>
+    </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script>
-  
+
     console.log(localStorage.getItem("token"));
       $('#login_form').click(function(){
         var username = $('#username').val();
@@ -69,7 +106,7 @@
           })
           });
           </script>
-          
+
     <script>
     // $("#login_form").on("click", function(e) {
     //     var username = $("#username").val();
@@ -81,11 +118,10 @@
     //         document.cookie = 'token='+token+";path=/";
     //         window.location.href = "/gallery/";
     //     });
-    // });    
+    // });
     </script>
-    
 
-      
+
+
 </body>
 </html>
-  
