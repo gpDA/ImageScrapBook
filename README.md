@@ -61,3 +61,14 @@ For ease of development, even the database has been containerized. However, data
 
 PROJECT DESIGN IMAGE
 ![PROJECT DESIGN IMAGE](https://user-images.githubusercontent.com/29666846/49106991-94a6ce80-f252-11e8-8e34-c0dd67f66eec.jpeg)
+
+## Installing Chrome Extension 
+
+1. Download the 'extension' folder to your local computer
+2. open chrome://extensions/
+3. turn on the 'developer mode' on the top right corner
+4. clikc 'Load unpacked' and select the extension folder (it should contain the manifes.json file along with other html, css, and js files)
+5. Our icon will then be up.
+
+
+
