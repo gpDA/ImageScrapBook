@@ -1,10 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<style>
+    body{
+    
+      font-family: Avenir;
+      font-weight: bold;
+    
+    }
+    .label_tag{
+      font-size: 15px;
+      font-style: bold;
+      color:red;
+    }
+    .input{
+      padding:7px;
+      margin: 1px 1px 5px 0;
+    }
+    label{
+        font-weight: bold;
+    }
+    .btn{
+        background-color: #f8b500;
+        color: black;
+        font-weight:bold;
+    }
+    </style>
+
+<h2>Sign Up</h2>
+<hr>
+
 <form method='post'>
   {% csrf_token %}
-  <div>Username <div>{{ form.username }}</div></div>
-  <div>Password <div>{{ form.password }}</div></div>
-  <div><input type='submit' value='Register'></div>
+  <div>Username <div class='input'>{{ form.username }}</div></div>
+  <div>Password <div class='input'>{{ form.password }}</div></div>
+  <div><input type='submit' class='btn' value='Register'></div>
 </form>
 {% endblock %}
