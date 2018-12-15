@@ -1,6 +1,6 @@
 from django.urls import include, path, reverse_lazy
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.contrib.auth.views import LogoutView
 from django.views.generic.base import RedirectView
 
 
@@ -10,7 +10,7 @@ urlpatterns = [
     path('auth/', include('rest_framework.urls')),
     path('api/', include('main.urls')),
     path('login/', include('login.urls')),
-    path('logout', TemplateView.as_view(template_name="registration/logout.html"), name='logout'),
+    path('logout', LogoutView.as_view(), name='logout'),
     path('image/', include('image.urls')),
     path('api/', include('registration.urls')),
     path('gallery/', include('gallery_django.urls'))
