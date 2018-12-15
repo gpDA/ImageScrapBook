@@ -8,7 +8,7 @@ img {
 </style>
 <h1>{{ object.title }}</h1>
 <figure class='figure'>
-  {% include 'image_fragment.html' with bucket='image' url=object.imageurl %}
+  <a href='http://gallerystore.skye.tech:9000/image/{{ object.imageurl }}'>{% include 'image_fragment.html' with bucket='image' url=object.imageurl %}</a>
   <figcaption class='figure-caption-text-right'>Posted by: <a href='{% url "gallery" object.user.pk %}'>{{ object.user.username }}</a> at {{ object.timestamp }}</figcaption>
 </figure>
 <a href='{% url "share" object.id %}'><button>Share</button></a>
