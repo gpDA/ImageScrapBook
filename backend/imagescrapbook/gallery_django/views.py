@@ -30,7 +30,7 @@ class GalleryView(ListView):
             qs = qs.filter(user=self.kwargs['pk'])
         else:
             qs = qs.filter(privacy=False)
-        return qs
+        return qs.order_by('-timestamp')
 
     def get_context_data(self, **kwargs):
         if 'pk' in self.kwargs:
