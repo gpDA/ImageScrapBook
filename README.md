@@ -1,6 +1,10 @@
-# Installing
+# ImageScrapBook
+
+ImageScrapBook is a cloud-native webapp for hosting and sharing images.
+
+## Installing
 Install Docker. Then:
-## Installing backend
+### Installing backend
 Run `docker-compose up --build` while in the `backend/` directory. Docker downloads all deps and builds all containers.
 
 - ERROR HELPER
@@ -9,7 +13,7 @@ Run `docker-compose up --build` while in the `backend/` directory. Docker downlo
     2) cd ..
     3) run `docker-compose up --build`
 
-# Running (pipenv shell is optional)
+## Running (pipenv shell is optional)
 `pipenv shell` to switch to virtual env--shouldn't be required.  
 - ERROR HELPER
     FIRST, if you have not used `pipenv` before `brew install pipenv`
@@ -33,9 +37,9 @@ Run `docker-compose up --build` while in the `backend/` directory. Docker downlo
 ## Configuring Django
 Changing the "command" attribute of `appserver` in `backend/docker-compose.yml` allows you to execute commands such as makemigrations, migrate, runserver and createsuperuser.
 
-# Notes for contributors
-## Organization
-### Service names
+## Notes for contributors
+### Organization
+#### Service names
 | docker-compose.yml | description |
 |-----------|------------------------------|
 | appserver | Django app                   |
