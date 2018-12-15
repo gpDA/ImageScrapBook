@@ -2,6 +2,8 @@
 <html>
   <head>
    <link rel="stylesheet" type="text/css" href="main.css">
+   <script src="jquery-3.3.1.js"></script>
+   <script src="save_img.js"></script>   
   </head>
   <body>
 <h2>Saving Page</h2>
@@ -13,29 +15,19 @@
 4. Save button
 -->
 
-<form method="POST" action="register">
+<img id='grabbed_img' width='25%' height='25%'>
 
-  <img id='grabbed_img' width='25%' height='25%'>
+<form id='form'>
 
   <p>
       <label for="title">Title</label><br />
       <input type="text" id="title" name="title" size="50" value="" />
   </p>
   <p>
-      <label for="url">Url</label><br />
-      <input type="text" id="url" name="url" size="50" value="">
-  </p>
-  <p>
-      <label for="comment">Comment</label><br />
-      <textarea id="comment" name="comment" rows="6" cols="35">
-      </textarea>
-  </p>
-  <p>
-      <input id="save" type="submit" value="Save Imgae" />
+      <span id="save">send image </span>
       <span id="status-display"></span>
   </p>
 
 </form>
-  <script src="save_img.js"></script>
 </body>
 </html>

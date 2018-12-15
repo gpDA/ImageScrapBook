@@ -36,8 +36,9 @@ function get_urls() {
 						chrome.extension.getBackgroundPage().console.log("clicked: ", picUrls[event.target.name].src);
 						urlLink =  picUrls[event.target.name].src
 						cu.link = picUrls[event.target.name].src;
-						chrome.extension.getBackgroundPage().console.log("clickeeeeeed: ",cu.link );
-						window.localStorage.setItem('clickedone', cu.link);
+						// chrome.extension.getBackgroundPage().console.log("clickeeeeeed: ",cu.link );
+						// window.localStorage.setItem('clicked_image', cu.link);
+						window.localStorage.setItem('clicked_image', cu.link);
 				})
 		}
 		else{

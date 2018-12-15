@@ -1,18 +1,3 @@
-
-<<<<<<< HEAD
-	"browser_action": {
-		"default_icon": "capture.png",
-		"default_title": "ImageScrapBook",
-		"default_popup": "popup.html"
-	},
-	  "background": {
-	    "scripts": ["background.js"],
-	    "persistent": false
-		},
-	"permissions": [
-		"notifications", "activeTab", "tabs", "contextMenus", "clipboardWrite", "<all_urls>", "http://*/*", "https://*/*"
-	]
-=======
 {
   "name": "ImageScrapBook",
   "description": "This extension is a tool to select an image, store and share them",
@@ -39,5 +24,4 @@
   "update_url": "https://clients2.google.com/service/update2/crx",
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
->>>>>>> 8195d36a99e7b06acf67fa68d12560df640030f9
 }
