@@ -22,6 +22,9 @@
     border-bottom: 1px solid #444;
 }
 
+.nav-item {
+    margin-right: 1rem;
+}
 </style>
 
 <body>
@@ -31,9 +34,16 @@
             <ul class='navbar-nav mr-auto flex-row'>
                 <li class='nav-item'><a href='{% url "publicgallery" %}'>Gallery</a></li>
                 {% if user.is_authenticated %}
-                <li class='nav-item'><a href='{% url "gallery" user.id %}'>My images</a></li>
-                {% endif %}
                 <li class='nav-item'><a href='{% url "uploadimage" %}'>Upload</a></li>
+                {% endif %}
+            </ul>
+            <ul class='navbar-nav navbar-right mr-auto flex-row'>
+                {% if user.is_authenticated %}
+                <li><a href='{% url "gallery" user.id %}'>{{ user.username }}</a></li>
+                {% else %}
+                <li class='nav-item'><a href='{% url "login" %}'>Login</a></li>
+                <li class='nav-item'><a href='{% url "signup" %}'>Signup</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
