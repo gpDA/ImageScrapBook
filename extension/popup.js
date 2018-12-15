@@ -37,8 +37,10 @@ function get_urls() {
 						urlLink =  picUrls[event.target.name].src
 						cu.link = picUrls[event.target.name].src;
 						// chrome.extension.getBackgroundPage().console.log("clickeeeeeed: ",cu.link );
+
+						// SET LOCALSTORAGE
 						// window.localStorage.setItem('clicked_image', cu.link);
-						window.localStorage.setItem('clicked_image', cu.link);
+						localStorage.setItem('clicked_image', cu.link);
 				})
 		}
 		else{
@@ -56,14 +58,15 @@ window.onload = get_urls();
 //=============BUTTONS on HTML===============
 
 //TODO: direct to my gallery/public gallery
-var newURL = "http://google.com";
+var galleryURL = "http:localhost:8000/gallery/public";
+var loginURL = "http://localhost:8000/login";
 
 function go_public_gallery(){
 	var pg_btn = document.getElementById('public_gallery_btn');
 	pg_btn.addEventListener('click', function() {
 			chrome.extension.getBackgroundPage().console.log("open publilc gallery");
 			//open the public gallery page
-			chrome.tabs.create({url: newURL});
+			chrome.tabs.create({url: galleryURL});
 	});
 }
 
@@ -72,7 +75,7 @@ function go_gallery(){
 	g_btn.addEventListener('click', function() {
 			chrome.extension.getBackgroundPage().console.log("open my gallery");
 			//open the my gallery page
-			chrome.tabs.create({url: newURL});
+			chrome.tabs.create({url: loginURL});
 	});
 }
 

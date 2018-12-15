@@ -63,9 +63,15 @@ class Base64ImageField(serializers.ImageField):
         return extension
 
 class ImageCreateSerializer(serializers.ModelSerializer):
+
+    
+    # user = serializers.IntegerField(required=False)
+
     image = Base64ImageField(
         max_length=None, use_url=True,
     )
+
+    # user = '1'
 
     # user = self.request.user
     # user = User.objects.get(pk=uid).id

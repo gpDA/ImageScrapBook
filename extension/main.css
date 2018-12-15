@@ -1,4 +1,56 @@
 body{
+  min-width: 360px !important;;
+  overflow: scroll !important;;
+  text-align: center !important;;
+  background-color: f7f7f7 !important;;
+  /* font-family: Garamond, serif  !important; */
+  /* font-family: Lato,'Helvetica Neue', Arial,Helvetica,sans-serif !important; */
+  font-family: Avenir !important;;
+}
+#tname {
+   font: 30px/1.5 'Merienda One', Helvetica, sans-serif;
+   color: black;
+   text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);
+   margin: 0 0 0em !important;
+  line-height: 2em !important;
+}
+div > ul > li{
+  list-style-type: none !important;
+  padding:0;
+  margin:0;
+}
+ul{
+  list-style-type: none !important;
+  padding:0;
+  margin:0;
+}
+li {
+  display: inline;
+}
+
+img{
+  border: .7px solid #5c636e !important;
+  border-radius: 4px !important;
+  margin: 5px;
+  width: 100px;
+  height: 60px;
+
+}
+h1{
+  text-align: center;
+}
+h4{
+  text-align: center;
+}
+#btn{
+  background-color: f8b500 !important;
+}
+button{
+  background-color: f8b500 !important;
+}
+
+
+/* body{
   min-width: 300px;
   overflow: scroll;
 }
@@ -33,4 +85,4 @@ h3{
     color: white;
     border-radius: 9px;
 
-}
+} */

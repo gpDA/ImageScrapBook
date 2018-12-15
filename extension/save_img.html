@@ -6,16 +6,52 @@
    <script src="save_img.js"></script>   
   </head>
   <body>
-<h2>Saving Page</h2>
+<style>
+    img{
+       border: .7px solid #5c636e !important;
+       border-radius: 4px !important;
+       margin: 5px;
+       width: 100px;
+       height: 60px;
+     }
+     body{
+       display: grid;
+       font-family: Avenir;
+       -webkit-text-size-adjust: 100%;
+       -webkit-font-smoothing: antialiased;
+     }
+     input{
+       padding:7px;
+       margin: 1px 1px 5px 0;
+     }
+     label{
+       font-size: 15px;
+       font-style: bold;
+     }
+     #save {
+       background-color: #f8b500;
+      color: black;
+      display: block;
+      height: 24px;
+      line-height: 24px;
+      text-decoration: none;
+      width: 80px;
+      text-align: center;
+      font-family: Avenir;
+      font-weight: bold;
+      margin-right: auto;
+         margin-left:auto;
+     }
+     #my_img{
+         margin-right: auto;
+         margin-left:auto;
+     }
 
-<!-- TODO:
-1. show the image selected
-2. input: title, comment, shared by
-3. show src of the picture
-4. Save button
--->
+</style>
+<h2>&lt; Saving Page &gt; </h2>
 
-<img id='grabbed_img' width='25%' height='25%'>
+
+<div id='my_img'><img id='grabbed_img' width='25%' height='25%'></div>
 
 <form id='form'>
 
@@ -23,8 +59,10 @@
       <label for="title">Title</label><br />
       <input type="text" id="title" name="title" size="50" value="" />
   </p>
+
+    <input type="text" style="display:none;" id="url" name="url" size="50" value="">
   <p>
-      <span id="save">send image </span>
+      <div id="save">Save Image </div>
       <span id="status-display"></span>
   </p>
 

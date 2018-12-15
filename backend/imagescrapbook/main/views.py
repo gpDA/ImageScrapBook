@@ -30,8 +30,10 @@ class ImageCreateAPIView(generics.CreateAPIView): #ListCreateAPIView
     #queryset                        = Image.objects.all()
     serializer_class                = ImageCreateSerializer #ImageSerializer
 
-    def get_serializer_context(self, *args, **kwargs):
-        return {"user": self.request.user}
+    # user = request.session['user']
+    
+    # def get_serializer_context(self, *args, **kwargs):
+    #     return {"user": '1'} # self.request.user
     
     '''
     @method_decorator(csrf_exempt)

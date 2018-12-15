@@ -6,6 +6,10 @@ import django.forms as forms
 from django.forms import ModelForm
 from django.urls import reverse_lazy, reverse
 
+from django.shortcuts import render
+from django.dispatch import receiver
+from django.contrib.auth.signals import user_logged_in
+
 
 class Login(LoginView):
     template_name = 'login/login.html'
@@ -13,6 +17,15 @@ class Login(LoginView):
     def get_success_url(self):
         url = self.get_redirect_url()
         return url or reverse('publicgallery')
+
+    @receiver(user_logged_in)
+    def sig_user_logged_in(self, user, request, **kwargs):
+    
+        request.session['username'] = user.username
+
+    
+
+
 
 
 class UserForm(ModelForm):
