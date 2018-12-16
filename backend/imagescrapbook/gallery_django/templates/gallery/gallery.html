@@ -2,67 +2,55 @@
 
 {% block content %}
 <style>
+.header {
+  color: black;
+  text-decoration: none;
+  font-size: 1.5em;
+}
 
+.header:hover {
+  text-decoration: none;
+  border-bottom: none;
+  color: #444;
+}
+
+.inlineuser {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.imageholder {
+  width: 210px;
+  height: 210px;
+}
+
+.imageholder>img {
+  max-height: 100%;
+  max-width: 100%;
+}
 </style>
 
 {% ifequal gallerytype 'public' %}
 <div><h1>Public Gallery</h1></div>
-
-
-<div class="ui grid link cards">
-    {% for image in object_list %}
-      <div class="card six wide column">
-        <div class="image">
-          <img src='{{ image.get_absolute_url }}'>
-        </div>
-        <div class="content">
-          <!-- {% include 'image_fragment.html' with bucket='thumb' url=image.thumbnail_url %} -->
-          <div class="header">{{ image.title }} By {{ image.user.username }} </div>
-        </div>
-  
-        <div class="extra content">
-          <button id = 'share_btn' class="ui primary button">
-            Share
-          </button>
-        </div>
-      </div>
-    {% endfor %}
-    </div>
-
-
+{% endifequal %}
+{% ifequal gallerytype 'user' %}
+<div><h1><a href=''>{{ username }}</a>'s Gallery</h1></div>
 {% endifequal %}
 
 
-
-
-
-
-
-{% ifequal gallerytype 'user' %}
-<div><h1>{{ username }}'s Gallery</h1></div>
-
-
 <div class="ui grid link cards">
     {% for image in object_list %}
       <div class="card six wide column">
-        <div class="image">
-          <img src={{ image.get_absolute_url }}>
-        </div>
-        <div class="content">
-            <figure class='figure'>
-              {% include 'image_fragment.html' with bucket='thumb' url=image.thumbnail_url %}
-              <figcaption class='figure-caption-text-left header'>{{ image.title }} by {{ image.user.username }}</figcaption>
-            </figure>
-        </div>
-  
-        <div class="extra content">
-          <button id = 'share_btn' class="ui primary button">
-            Share
-          </button>
-        </div>
+        <a href="{{ image.get_absolute_url }}">
+          <div class="image">
+            <div class='imageholder'>{% include "image_fragment.html" with bucket='thumb' url=image.thumbnail_url %}</div>
+            <div class='header'>{{ image.title }} <span class='inlineuser'>by {{ image.user.username }}</span></div>
+          </div>
+          <div class="extra content">
+          </div>
+        </a>
       </div>
   {% endfor %}
   </div>
-{% endifequal %}
 
 {% endblock content %}
