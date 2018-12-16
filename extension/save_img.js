@@ -50,7 +50,7 @@ $("#save").on('click', function(e){
 
   $.ajax({
     type: "POST",
-    url: "http://localhost:8000/api/create",
+    url: "http://gallerydemo.skye.tech/api/create",
     data: formData,
     // beforeSend : function(xhr) {  
     //   // var cookie = credentials["COOKIE"];
@@ -74,7 +74,7 @@ $("#save").on('click', function(e){
       // var token = data["token"];
       // console.log(token)
 
-      chrome.tabs.create({url: 'http:localhost:8000/gallery/public'});
+      chrome.tabs.create({url: 'http://gallerydemo.skye.tech/gallery/public'});
       // console.log('successs,,,,' + xhr.getResponseHeader("Set-Cookie"));
 
       // window.location.href = "http://localhost:8000/gallery/public";

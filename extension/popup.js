@@ -58,8 +58,8 @@ window.onload = get_urls();
 //=============BUTTONS on HTML===============
 
 //TODO: direct to my gallery/public gallery
-var galleryURL = "http:localhost:8000/gallery/public";
-var loginURL = "http://localhost:8000/login";
+var galleryURL = "http://gallerydemo.skye.tech/gallery/public";
+var loginURL = "http://gallerydemo.skye.tech/login";
 
 function go_public_gallery(){
 	var pg_btn = document.getElementById('public_gallery_btn');
