@@ -2,13 +2,18 @@
 
 ImageScrapBook is a cloud-native webapp for hosting and sharing images.
 
-## Installing Chrome Extension 
-
+## Installing the Chrome Extension
 1. Download the project file from this git repository 
 2. open chrome://extensions/
 3. turn on the 'developer mode' on the top right corner
 4. click 'Load unpacked' and select the 'extension' folder within the downloaded project folder
 5. Our icon will then be up!
+
+
+## Technical Difficulties
+In the extension, we couldn't implement a function to check the authenticated user and save the corresponding image for that specfic user.
+So for example, in `extension/save_img.js` , where the image creation (post) happens, we hard-coded the user with user_id : 1 for the sake of deploying. In the future, we would implement the authentication process. 
+
 
 ## Contributing
 Here is a guide on installing a local copy of Image Scrap Book.
@@ -56,7 +61,6 @@ For ease of development, even the database has been containerized. However, data
 
 PROJECT DESIGN IMAGE
 ![PROJECT DESIGN IMAGE](https://user-images.githubusercontent.com/29666846/49106991-94a6ce80-f252-11e8-8e34-c0dd67f66eec.jpeg)
-
 
 
 
