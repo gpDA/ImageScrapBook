@@ -64,11 +64,11 @@ PROJECT DESIGN IMAGE
 
 ## Installing Chrome Extension 
 
-1. Download the 'extension' folder to your local computer
+1. Download the project file from this git repository 
 2. open chrome://extensions/
 3. turn on the 'developer mode' on the top right corner
-4. clikc 'Load unpacked' and select the extension folder (it should contain the manifes.json file along with other html, css, and js files)
-5. Our icon will then be up.
+4. click 'Load unpacked' and select the 'extension' folder within the downloaded project folder
+5. Our icon will then be up!
 
 
 
