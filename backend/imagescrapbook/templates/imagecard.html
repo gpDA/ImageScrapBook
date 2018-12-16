@@ -1,0 +1,4 @@
+<div class="image">
+    <div class='imageholder' style='width:210px; height:210px;'>{% include "image_fragment.html" with bucket='thumb' url=image.thumbnail_url %}</div>
+    <div class='content'><div class='header'>{{ image.title }} <span class='inlineuser'>by {{ image.user.username }}</span></div></div>
+</div>

@@ -18,16 +18,6 @@
   font-size: 0.8em;
   color: #888;
 }
-
-.imageholder {
-  width: 210px;
-  height: 210px;
-}
-
-.imageholder>img {
-  max-height: 100%;
-  max-width: 100%;
-}
 </style>
 
 {% ifequal gallerytype 'public' %}
@@ -42,10 +32,7 @@
     {% for image in object_list %}
       <div class="card six wide column">
         <a href="{{ image.get_absolute_url }}">
-          <div class="image">
-            <div class='imageholder'>{% include "image_fragment.html" with bucket='thumb' url=image.thumbnail_url %}</div>
-            <div class='header'>{{ image.title }} <span class='inlineuser'>by {{ image.user.username }}</span></div>
-          </div>
+          {% include "imagecard.html" with image=image %}
           <div class="extra content">
           </div>
         </a>
