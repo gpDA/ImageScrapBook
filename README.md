@@ -2,47 +2,33 @@
 
 ImageScrapBook is a cloud-native webapp for hosting and sharing images.
 
-## Installing Chrome Extension 
+## Installing the Chrome Extension
+1. Ensure the `extensions/` directory is on your disk.
+2. Navigate to `chrome://extensions/`.
+3. If not enabled already, enable Developer Mode.
+4. Click 'Load unpacked' and select the `extension` directory.
+5. The extension will display an orange camera icon in the top-right corner of the browser.
 
-1. Download the 'extension' folder to your local computer
-2. open chrome://extensions/
-3. turn on the 'developer mode' on the top right corner
-4. clikc 'Load unpacked' and select the extension folder (it should contain the manifes.json file along with other html, css, and js files)
-5. Our icon will then be up.
+## Contributing
+Here is a guide on installing a local copy of Image Scrap Book.
 
-## Technical Difficulties
-In the extension, we couldn't implement a function to check the authenticated user and save the corresponding image for that specfic user.
-So for example, in `extension/save_img.js` , where the image creation (post) happens, we hard-coded the user with user_id : 1 for the sake of deploying. In the future, we would implement the authentication process. 
-
-
-## Installing
 Install Docker. Then:
 ### Installing backend
 Run `docker-compose up --build` while in the `backend/` directory. Docker downloads all deps and builds all containers.
 
-- ERROR HELPER
-    IF `ERROR: for backend_appserver_1_606e41b6d69c  Cannot start service appserver: OCI runtime create failed: container_linux.go:348: starting container process caused "exec: \"./init.sh\": permission denied": unknown` this error appears
-    1) ImageScrapBook/backend/imagescrapbook `sudo chmod 777 init.sh`
-    2) cd ..
-    3) run `docker-compose up --build`
-
-## Running (pipenv shell is optional)
+## Running
 `pipenv shell` to switch to virtual env--shouldn't be required.  
-- ERROR HELPER
-    FIRST, if you have not used `pipenv` before `brew install pipenv`
-    currently required python_version for pipenv is python==3.6
-    If pipenv is not intalled correctly,
-    check  python version `python3 --version`
-    I think if you use Anaconda for Python the default version for python3 is python==3.7.1 ...
-    ERROR `Warning: Python 3.6.2 was not found on your system…`
-    Then, you may install Python 3.6 by https://www.python.org/downloads/release/python-367/
-    Then check `python3 --version` again
-    `pipenv --python /usr/local/bin/python3`
-    now run `pipenv shell` for virtual environment
 
-    `pip install -r ../../requirements.txt`
 
---------------------------------------------  
+## Troubleshooting
+### `ERROR: for backend_appserver_1_606e41b6d69c  Cannot start service appserver: OCI runtime create failed: container_linux.go:348: starting container process caused "exec: \"./init.sh\": permission denied": unknown`
+
+```
+$ sudo chmod 777 ImageScrapBook/backend/imagescrapbook/init.sh`
+$ docker-compose up --build
+```
+
+### Other useful commands
 
 `docker-compose up --build` to run a Docker setup for the first time.  
 `docker-compose build [containers...]; docker-compose up` to rebuild changed containers.  
@@ -52,19 +38,14 @@ Changing the "command" attribute of `appserver` in `backend/docker-compose.yml` 
 
 ## Notes for contributors
 ### Organization
-#### Service names
-| docker-compose.yml | description |
+| Name | description |
 |-----------|------------------------------|
 | appserver | Django app                   |
 | postgres  | Postgres database            |
-
-| docker-compose.yml | description |
-|--------------|-----------------------------|
 | rabbit       | RabbitMQ backing for Celery |
 | minio        | Local S3 mocking for dev |
 | celeryworker | Workers that process Celery jobs |
 | workprovider | Puts Celery jobs for testing purposes |
-
 
 
 ## Database containers
@@ -75,7 +56,5 @@ For ease of development, even the database has been containerized. However, data
 PROJECT DESIGN IMAGE
 ![PROJECT DESIGN IMAGE](https://user-images.githubusercontent.com/29666846/49106991-94a6ce80-f252-11e8-8e34-c0dd67f66eec.jpeg)
 
-
-
-
-
+## Technical Difficulties
+We couldn't implement authentication in the extension, so the current version instead hardcodes uploading images as user id 1. Fixing this is a top priority for the future.

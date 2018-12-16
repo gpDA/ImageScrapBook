@@ -1,21 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div><h1>Shared with Me </h1></div>
+<div><h1>Shared with me </h1></div>
+<style>
+.header {
+  color: black;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+.header:hover {
+  text-decoration: none;
+  border-bottom: none;
+  color: #444;
+}
+
+.inlineuser {
+  font-size: 0.8em;
+  color: #888;
+}
+</style>
 <div class="ui grid link cards">
 {% for shared in object_list %}
 
-<div class="card six wide column">
-    <div class="image">
-      <img src="{{ shared.image.get_absolute_url }}">
-    </div>
-    <div class="content">
-      <div class="header">{{ shared.image.title }} By {{ shared.image.user.username }}</div>
-    </div>
-
+<div class="card six wide column"
+     onclick='window.location.href = "{{ shared.image.get_absolute_url }}"'>
+    {% include "imagecard.html" with image=shared.image %}
     <div class="extra content">
       <span class="right floated">
-        Shared by {{ shared.shared_by.username }}
+        Shared by
+        <a href='{{ shared.shared_by.get_absolute_url}}'>
+          {{ shared.shared_by.username }}
+        </a>
       </span>
     </div>
 </div>
