@@ -1,22 +1,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+
+</style>
+
 {% ifequal gallerytype 'public' %}
 <div><h1>Public Gallery</h1></div>
+
+
+<div class="ui grid link cards">
+    {% for image in object_list %}
+      <div class="card six wide column">
+        <div class="image">
+          <img src='{{ image.get_absolute_url }}'>
+        </div>
+        <div class="content">
+          <!-- {% include 'image_fragment.html' with bucket='thumb' url=image.thumbnail_url %} -->
+          <div class="header">{{ image.title }} By {{ image.user.username }} </div>
+        </div>
+  
+        <div class="extra content">
+          <button id = 'share_btn' class="ui primary button">
+            Share
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+
 {% endifequal %}
+
+
+
+
+
+
+
 {% ifequal gallerytype 'user' %}
 <div><h1>{{ username }}'s Gallery</h1></div>
-{% endifequal %}
-<div>
-  {% for image in object_list %}
-  <div class='col-lg-3 col-md-4 col-xs-6 thumb'>
-    <a href='{{ image.get_absolute_url }}'>
-      <figure class='figure'>
-        {% include 'image_fragment.html' with bucket='thumb' url=image.thumbnail_url %}
-        <figcaption class='figure-caption-text-left'>{{ image.title }} by {{ image.user.username }}</figcaption>
-      </figure>
-    </a>
-  </div>
+
+
+<div class="ui grid link cards">
+    {% for image in object_list %}
+      <div class="card six wide column">
+        <div class="image">
+          <img src={{ image.get_absolute_url }}>
+        </div>
+        <div class="content">
+            <figure class='figure'>
+              {% include 'image_fragment.html' with bucket='thumb' url=image.thumbnail_url %}
+              <figcaption class='figure-caption-text-left header'>{{ image.title }} by {{ image.user.username }}</figcaption>
+            </figure>
+        </div>
+  
+        <div class="extra content">
+          <button id = 'share_btn' class="ui primary button">
+            Share
+          </button>
+        </div>
+      </div>
   {% endfor %}
-</div>
+  </div>
+{% endifequal %}
+
 {% endblock content %}

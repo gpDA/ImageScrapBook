@@ -1,35 +1,24 @@
-<!-- {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div><h1>Shared with me </h1></div>
-<div>
+<div><h1>Shared with Me </h1></div>
+<div class="ui grid link cards">
 {% for shared in object_list %}
-<div class='img center-block' style='display:flex;flex-direction:column;align-items:center;'>
-  <a href='{{ shared.image.get_absolute_url }}'>
-    <figure class='figure'>
-      {% include 'image_fragment.html' with bucket='thumb' url=shared.image.thumbnail_url %}
-      <figcaption class='figure-caption-text-right'>{{ shared.image.title }} by <a href='{% url "gallery" shared.image.user.pk %}'>{{ shared.image.user.username }}</a></figcaption>
-    </figure>
-  </a>
-  <div>(Shared by {{ shared.shared_by.username }})</div>
-  <hr class='imghr'>
+
+<div class="card six wide column">
+    <div class="image">
+      <img src="{{ shared.image.get_absolute_url }}">
+    </div>
+    <div class="content">
+      <div class="header">{{ shared.image.title }} By {{ shared.image.user.username }}</div>
+    </div>
+
+    <div class="extra content">
+      <span class="right floated">
+        Shared by {{ shared.shared_by.username }}
+      </span>
+    </div>
 </div>
 {% endfor %}
 </div>
-{% endblock content %} -->
-<head>
-  <link href="../../../static/css/semantic.min.css" rel="stylesheet" type="text/css">
-  <link href="../../../static/css/index1.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-  <div class = 'ui fluid container'>
-  <div class="ui primary black inverted menu">
-    <div class="header item">Site Title</div>
-    <div class="ui text menu">
-      <a class="item">Item 1</a>
-      <a class="item">Item 2</a>
-      <a class="item">Item 3</a>
-    </div>
-  </div>
-  </div>
-</body>
+{% endblock content %}
