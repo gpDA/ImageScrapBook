@@ -1,5 +1,7 @@
 # ImageScrapBook
 
+Video Demo : https://www.youtube.com/watch?v=lS2d4uhoqBg&feature=youtu.be
+
 ImageScrapBook is a cloud-native webapp for hosting and sharing images.
 
 ## Installing the Chrome Extension
