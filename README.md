@@ -4,6 +4,8 @@ ImageScrapBook is a cloud-native webapp for hosting and sharing images.
 # VIDEO DEMO
 [![ImageScrapBook video Demo](https://img.youtube.com/vi/lS2d4uhoqBg/0.jpg)](https://www.youtube.com/watch?v=lS2d4uhoqBg)
 
+# PROJECT DESIGN IMAGE
+![PROJECT DESIGN IMAGE](https://user-images.githubusercontent.com/29666846/49106991-94a6ce80-f252-11e8-8e34-c0dd67f66eec.jpeg)
 
 # Installing the Chrome Extension
 1. Ensure the `extensions/` directory is on your disk.
@@ -54,10 +56,6 @@ Changing the "command" attribute of `appserver` in `backend/docker-compose.yml` 
 # Database containers
 
 For ease of development, even the database has been containerized. However, databases aren't good containerization targets in the real world, and if this project is ever deployed, an alternative automation scheme for setting up and maintaining a non-containerized database cluster will be required.
-
-
-PROJECT DESIGN IMAGE
-![PROJECT DESIGN IMAGE](https://user-images.githubusercontent.com/29666846/49106991-94a6ce80-f252-11e8-8e34-c0dd67f66eec.jpeg)
 
 # Technical Difficulties
 We couldn't implement authentication in the extension, so the current version instead hardcodes uploading images as user id 1. Fixing this is a top priority for the future.
