@@ -1,6 +1,6 @@
 # ImageScrapBook
 
-Video Demo : https://www.youtube.com/watch?v=lS2d4uhoqBg&feature=youtu.be
+[![ImageScrapBook video Demo](https://img.youtube.com/vi/lS2d4uhoqBg/2.jpg)](https://www.youtube.com/watch?v=lS2d4uhoqBg)
 
 ImageScrapBook is a cloud-native webapp for hosting and sharing images.
 
